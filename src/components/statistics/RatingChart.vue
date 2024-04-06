@@ -3,7 +3,7 @@
 </script>
 
 <template>
-
+Rating Chart!
 </template>
 
 <style scoped>

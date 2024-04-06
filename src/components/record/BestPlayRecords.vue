@@ -3,7 +3,7 @@
 </script>
 
 <template>
-Song Levels!
+Best Play Records!
 </template>
 
 <style scoped>

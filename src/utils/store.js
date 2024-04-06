@@ -11,3 +11,11 @@ export const useUserStore = defineStore('userStore', {
         }
     }
 })
+
+export const useStore = defineStore('store', {
+    state: () => {
+        return {
+            levels: null,
+        }
+    }
+})

@@ -3,7 +3,7 @@
 </script>
 
 <template>
-Song Levels!
+
 </template>
 
 <style scoped>
