@@ -30,7 +30,7 @@ export default {
             })
         },
         register(username, email, password) {
-            return client.post('user/login', {
+            return client.post('/user/register', {
                 username: username,
                 email: email,
                 password: password,
@@ -52,11 +52,11 @@ export default {
         },
 
         // Record
-        getAllRecords() {
-            return client.get('/user/records')
+        getAllRecords(username) {
+            return client.get('/records' + username)
         },
-        getAllBestRecords() {
-            return client.get('/user/records', {
+        getAllBestRecords(username) {
+            return client.get('/records + username', {
                 params: { best: true }
             })
         },
