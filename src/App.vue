@@ -104,7 +104,7 @@ const onClickRegisterBtn = () => {
       <el-dialog v-model="loginDialogVisible" :title="$t('auth.login')">
         <LoginForm @login-success="onLoginSuccess"/>
       </el-dialog>
-      <el-dialog v-model="profileDialogVisible" :title="$t('auth.account')">
+      <el-dialog v-model="profileDialogVisible" :title="$t('auth.account')" destroy-on-close>
         <UserProfile @cancel="profileDialogVisible=false"/>
       </el-dialog>
       <el-header>
