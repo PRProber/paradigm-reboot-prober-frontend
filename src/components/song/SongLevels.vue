@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, ref } from "vue";
+import { onMounted } from "vue";
 import { ElMessage } from "element-plus";
 
 import { useStore } from "@/utils/store";
@@ -15,9 +15,9 @@ const refreshLevelInfo = () => {
       message: "Successfully get level information",
       type: "success"
     })
-  }).catch(error => {
+  }).catch( error => {
     ElMessage({
-      message: "Failed to get level information",
+      message: "Failed to get level information. Details" + error.toString(),
       type: "error"
     })
   })

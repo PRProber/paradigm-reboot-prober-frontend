@@ -1,5 +1,4 @@
 <script setup>
-import { ref, reactive } from 'vue'
 const props = defineProps(['song'])
 const cover_src_root = 'http://localhost:8000/api/v1/cover/'
 

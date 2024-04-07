@@ -67,9 +67,9 @@ const onMoreIconClicked = songId => {
   singleSongInfoDialogVisible.value = true
   getSingleSongInfo(songId).then((response) => {
     singleSongInfo.value = response.data
-  }).catch(error => {
+  }).catch( error => {
     ElMessage({
-      message: "Failed to get single info",
+      message: "Failed to get single info. Details: " + error.toString(),
       type: "error"
     })
   })
