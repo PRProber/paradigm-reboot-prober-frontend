@@ -1,14 +1,38 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import { DataAnalysis, Medal, Memo, PieChart, User } from "@element-plus/icons-vue";
-import { useUserStore } from "@/utils/store";
+import { useI18n } from "vue-i18n";
 
+
+import { useUserStore } from "@/utils/store";
 import LoginForm from "@/components/user/LoginForm.vue";
 import RegisterForm from "@/components/user/RegisterForm.vue";
+import { getMyInfo } from "@/utils/api";
+import {ElMessage} from "element-plus";
+
 const userStore = useUserStore()
+const i18n = useI18n()
 
 // TODO: check login status on mount
 onMounted(() => {
+  console.log(userStore.username)
+  console.log(userStore.access_token)
+  getMyInfo().then(response => {
+    userStore.profile = response.data
+    userStore.username = response.data.username
+    userStore.logged_in = true
+    userStore.is_admin = response.data.is_admin
+    ElMessage({
+      "type": "success",
+      "message": i18n.t('message.login_success')
+    })
+    ElMessage({
+      "type": "success",
+      "message": i18n.t('message.get_my_info_success')
+    })
+  }).catch(error => {
+    let response = error.response;
+  })
 })
 
 const loginDialogVisible = ref(false)
@@ -30,6 +54,17 @@ const onRegisterSuccess = () => {
 
 const onLoginSuccess = () => {
   loginDialogVisible.value = false
+  console.log(userStore.access_token)
+  getMyInfo().then(response => {
+    userStore.profile = response.data
+    userStore.username = response.data.username
+    userStore.logged_in = true
+    userStore.is_admin = response.data.is_admin
+    ElMessage({
+      "type": "success",
+      "message": i18n.t('message.get_my_info_success')
+    })
+  })
 }
 
 const onClickRegisterBtn = () => {
