@@ -18,15 +18,14 @@ const form = reactive({
 })
 
 onMounted(() => {
-  const profile = userStore.profile
-  form.username = profile.username
-  form.email = profile.email
-  form.qq_number = profile.qq_number
-  form.account = profile.account
-  form.account_number = profile.account_number
-  form.uuid = profile.uuid
-  form.anonymous_probe = profile.anonymous_probe
-  form.upload_token = profile.upload_token
+  form.username = userStore.profile.username
+  form.email = userStore.profile.email
+  form.qq_number = userStore.profile.qq_number
+  form.account = userStore.profile.account
+  form.account_number = userStore.profile.account_number
+  form.uuid = userStore.profile.uuid
+  form.anonymous_probe = userStore.profile.anonymous_probe
+  form.upload_token = userStore.profile.upload_token
 })
 
 const onSave = () => {

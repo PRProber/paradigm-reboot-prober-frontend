@@ -77,7 +77,6 @@ const onClickProfileBtn = () => {
 
 const onLoginSuccess = () => {
   loginDialogVisible.value = false
-  console.log(userStore.access_token)
   getMyInfo().then(response => {
     userStore.profile = response.data
     userStore.username = response.data.username
