@@ -6,7 +6,8 @@ export const useUserStore = defineStore('userStore', {
             username: '',
             access_token: '',
             is_admin: false,
-            logged_in: false
+            logged_in: false,
+            profile: null
         }
     }
 })

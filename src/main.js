@@ -48,6 +48,7 @@ const router = createRouter({
 const i18n = createI18n({
     locale: 'zh_cn',
     fallbackLocale: 'en',
+    legacy: false,
     messages
 })
 

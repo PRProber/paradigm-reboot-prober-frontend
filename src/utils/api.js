@@ -27,10 +27,18 @@ userStore.$subscribe((_, state) => {
 })
 
 export const login = (username, password) => {
-    return client.post('/user/login', {
-        username: username,
-        password: password,
-    })
+    return client.post(
+        '/user/login',
+        {
+            username: username,
+            password: password,
+        },
+        {
+            headers: {
+                'content-type': 'application/x-www-form-urlencoded'
+            }
+        }
+    )
 }
 
 export const register = (username, email, password) => {

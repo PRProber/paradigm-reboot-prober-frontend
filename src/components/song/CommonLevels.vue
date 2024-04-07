@@ -5,65 +5,18 @@ import {More, Refresh} from "@element-plus/icons-vue";
 import SingleInfo from "@/components/song/SingleInfo.vue";
 import { getSingleSongInfo } from "@/utils/api";
 
+const emit = defineEmits(['refreshLevels'])
 const props = defineProps(['levels'])
 const singleSongInfoDialogVisible = ref(false)
 const search = ref('')
 
-const singleSongInfo = ref({
-  title: "Awaken In Ruins",
-  artist: "Supa7onyz",
-  genre: "Digital Rock",
-  cover: "Awaken In Ruins.png",
-  illustrator: "人間蛋",
-  version: "1.0.0",
-  b15: false,
-  album: "Prelude: 目覚め",
-  bpm: "125",
-  length: "2:16",
-  song_id: 1,
-  song_levels: [
-  {
-    difficulty_id: 1,
-    difficulty: "Detected",
-    level: 1,
-    level_design: "AxEradaS",
-    notes: 279
-  },
-  {
-    difficulty_id: 2,
-    difficulty: "Invaded",
-    level: 6,
-    level_design: "AxEradaS",
-    notes: 362
-  },
-  {
-    difficulty_id: 3,
-    difficulty: "Massive",
-    level: 10.5,
-    level_design: "AxEradaS",
-    notes: 592
-  }
-]
-})
+const singleSongInfo = ref(null)
 
 const filterHandler = (value, row, column) => {
   return row[column['property']] === value
 }
 
-const compare = (propertyName, sort) => {
-  return (o1, o2) => {
-    const v1 = o1[propertyName], v2 = o2[propertyName]
-    if (typeof v1 === 'string' && typeof v2 === 'string') {
-      const result = v1.localeCompare(v2, 'en')
-      return sort === 'ascending' ? result : -result;
-    } else {
-      if (v1 <= v2) return sort === 'ascending' ? -1 : 1
-      else return sort === 'ascending' ? 1 : -1
-    }
-  }
-}
-
-const onMoreIconClicked = songId => {
+const onSingleInfo = songId => {
   singleSongInfoDialogVisible.value = true
   getSingleSongInfo(songId).then((response) => {
     singleSongInfo.value = response.data
@@ -93,20 +46,22 @@ const filterTableData = computed(() => {
 </script>
 
 <template>
-  <el-dialog v-model="singleSongInfoDialogVisible" :title="dialogTitle()" width="800">
-    <SingleInfo :song="singleSongInfo"></SingleInfo>
+  <el-dialog v-if="singleSongInfo != null" v-model="singleSongInfoDialogVisible" :title="dialogTitle()" width="800">
+      <SingleInfo :song="singleSongInfo"></SingleInfo>
   </el-dialog>
   <el-row>
     <el-col>
       <el-auto-resizer>
+        <!--TODO: 替换成虚拟化表格-->
         <el-table
             :data="filterTableData"
+            table-layout="auto"
             style="width: 100%"
             max-height="700"
         >
-          <el-table-column fixed prop="title" :label="$t('term.title')" sortable>
+          <el-table-column fixed prop="title" :label="$t('term.title')" sortable min-width="120">
             <template #default="scope">
-              {{ scope.row.title }}
+              <el-link @click="onSingleInfo(scope.row.song_id)">{{ scope.row.title }}</el-link>
             </template>
           </el-table-column>
           <el-table-column prop="version" :label="$t('term.version')" sortable>
@@ -165,7 +120,7 @@ const filterTableData = computed(() => {
               </el-input>
             </template>
             <template #default="scope">
-              <el-icon @click="onMoreIconClicked(scope.row.song_id)"><More /></el-icon>
+              <el-icon @click="onSingleInfo(scope.row.song_id)"><More /></el-icon>
             </template>
           </el-table-column>
         </el-table>
