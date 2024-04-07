@@ -12,6 +12,9 @@ import UserProfile from "@/components/user/UserProfile.vue";
 import messages from "@/utils/message";
 import BestPlayRecords from "@/components/record/BestPlayRecords.vue";
 
+import "element-plus/theme-chalk/el-message-box.css"
+import "element-plus/theme-chalk/el-message.css"
+
 const app= createApp(App)
 const pinia = createPinia()
 
