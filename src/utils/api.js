@@ -4,7 +4,6 @@ import { pinia } from "@/utils/store";
 
 const beforeRequest = config => {
     const userStore = useUserStore(pinia)
-    console.log("Before request " + userStore.access_token)
     config.headers.Authorization = userStore.access_token
     return config
 }

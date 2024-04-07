@@ -7,7 +7,6 @@ import App from './App.vue'
 import SongLevels from "@/components/song/SongLevels.vue";
 import Best50Records from "@/components/record/Best50Records.vue";
 import PlayRecords from "@/components/record/PlayRecords.vue";
-import UserProfile from "@/components/user/UserProfile.vue";
 import messages from "@/utils/message";
 import { pinia } from "@/utils/store";
 import BestPlayRecords from "@/components/record/BestPlayRecords.vue";
@@ -34,10 +33,6 @@ const routes = [
         path: '/songs',
         component: SongLevels
     },
-    {
-        path: '/profile',
-        component: UserProfile
-    }
 ]
 const router = createRouter({
     history: createWebHashHistory(),

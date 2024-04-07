@@ -1,22 +1,22 @@
 <script setup>
 import { ref, onMounted } from "vue";
-import { DataAnalysis, Medal, Memo, PieChart, User } from "@element-plus/icons-vue";
+import { DataAnalysis, Medal, Memo, PieChart } from "@element-plus/icons-vue";
 import { useI18n } from "vue-i18n";
 
 
-import { useUserStore } from "@/utils/store";
+import { useUserStore, useStore } from "@/utils/store";
 import LoginForm from "@/components/user/LoginForm.vue";
 import RegisterForm from "@/components/user/RegisterForm.vue";
-import { getMyInfo } from "@/utils/api";
-import {ElMessage} from "element-plus";
+import {getAllSongLevels, getMyInfo} from "@/utils/api";
+import { ElMessage } from "element-plus";
+import UserProfile from "@/components/user/UserProfile.vue";
 
 const userStore = useUserStore()
+const store = useStore()
 const i18n = useI18n()
 
 // TODO: check login status on mount
 onMounted(() => {
-  console.log(userStore.username)
-  console.log(userStore.access_token)
   getMyInfo().then(response => {
     userStore.profile = response.data
     userStore.username = response.data.username
@@ -30,13 +30,32 @@ onMounted(() => {
       "type": "success",
       "message": i18n.t('message.get_my_info_success')
     })
-  }).catch(error => {
-    let response = error.response;
+  }).catch(() => {
+    if (userStore.logged_in) {
+      ElMessage({
+        "type": "warning",
+        "message": i18n.t("message.token_expired")
+      })
+      userStore.logged_in = false
+    }
+  })
+  getAllSongLevels().then(response => {
+    store.levels = response.data
+    ElMessage({
+      message: i18n.t('message.get_levels_success'),
+      type: "success"
+    })
+  }).catch( () => {
+    ElMessage({
+      message: i18n.t('message.get_levels_failed'),
+      type: "error"
+    })
   })
 })
 
 const loginDialogVisible = ref(false)
 const registerDialogVisible = ref(false)
+const profileDialogVisible = ref(false)
 
 const onClickLogoutBtn = () => {
   userStore.access_token = ''
@@ -50,6 +69,10 @@ const onClickLoginBtn = () => {
 const onRegisterSuccess = () => {
   registerDialogVisible.value = false
   loginDialogVisible.value = true
+}
+
+const onClickProfileBtn = () => {
+  profileDialogVisible.value = true
 }
 
 const onLoginSuccess = () => {
@@ -82,7 +105,9 @@ const onClickRegisterBtn = () => {
       <el-dialog v-model="loginDialogVisible" :title="$t('auth.login')">
         <LoginForm @login-success="onLoginSuccess"/>
       </el-dialog>
-
+      <el-dialog v-model="profileDialogVisible" :title="$t('auth.account')">
+        <UserProfile @cancel="profileDialogVisible=false"/>
+      </el-dialog>
       <el-header>
         <el-menu mode="horizontal" :ellipsis="false">
           <el-space>
@@ -94,13 +119,16 @@ const onClickRegisterBtn = () => {
             <el-text v-if="userStore.logged_in">
               {{ $t('message.welcome', { username: userStore.username }) }}
             </el-text>
-            <el-button v-if="userStore.logged_in === true" text @click="onClickLogoutBtn">
-              {{ $t('auth.logout') }}
+            <el-button v-if="userStore.logged_in" text @click="onClickProfileBtn">
+              <el-text type="primary">{{ $t('auth.profile') }}</el-text>
             </el-button>
-            <el-button v-if="userStore.logged_in === false" text @click="onClickLoginBtn">
+            <el-button v-if="userStore.logged_in" text @click="onClickLogoutBtn">
+              <el-text type="danger">{{ $t('auth.logout') }}</el-text>
+            </el-button>
+            <el-button v-if="!userStore.logged_in" text @click="onClickLoginBtn">
               {{ $t('auth.login') }}
             </el-button>
-            <el-button v-if="userStore.logged_in === false" text @click="onClickRegisterBtn">
+            <el-button v-if="!userStore.logged_in" text @click="onClickRegisterBtn">
               {{ $t('auth.register') }}
             </el-button>
           </div>
@@ -124,10 +152,6 @@ const onClickRegisterBtn = () => {
             <el-menu-item index="3" route="/records">
               <el-icon><Memo /></el-icon>
               <template #title>{{ $t('term.records') }}</template>
-            </el-menu-item>
-            <el-menu-item index="4" route="profile">
-              <el-icon><User /></el-icon>
-              <template #title>{{ $t('auth.account') }}</template>
             </el-menu-item>
           </el-menu>
         </el-aside>

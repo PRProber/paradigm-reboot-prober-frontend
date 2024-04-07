@@ -1,17 +1,27 @@
 const messages = {
     en: {
         common: {
-          submit: "Submit",
+            submit: "Submit",
+            yes: "Yes",
+            no: "No",
+            save: "Save",
+            cancel: "Cancel"
         },
         auth: {
             login: "Login",
             register: "Register",
             logout: "Logout",
+            profile: "Profile",
             account: "Account",
+            in_game_account: "In-game Account",
             username: "Username",
             password: "Password",
             confirm_password: "Confirm Password",
             email: "Email Address",
+            upload_token: "Upload Token",
+            qq_number: "QQ Number",
+            uuid: "In-game UUID",
+            anonymous_probe: "Permit Anonymous Query",
         },
         term: {
             b50: "Best 50",
@@ -50,24 +60,37 @@ const messages = {
             register_success: "Register success",
             register_failed: "Register failed, details: ",
             login_success: "Login success",
-            login_failed: "Login failed, possibly wrong username or password. details: ",
+            login_failed: "Login failed, details: ",
+            get_levels_success: "Successfully get level info",
+            get_levels_failed: "Failed to get level info",
             get_my_info_success: "Successfully get user profile",
-            get_my_info_failed: "Failed to get user profile. Details: "
+            get_my_info_failed: "Failed to get user profile. Details: ",
+            token_expired: "Access token has expired, please re-login"
         }
     },
     zh_cn: {
         common: {
-          submit: "提交",
+            submit: "提交",
+            yes: "是",
+            no: "否",
+            save: "保存",
+            cancel: "取消",
         },
         auth: {
             login: "登入",
             register: "注册",
             logout: "登出",
+            profile: "个人资料",
             account: "账户",
+            in_game_account: "游戏内账户",
             username: "用户名",
             password: "密码",
             confirm_password: "确认密码",
-            email: "电子邮箱"
+            email: "电子邮箱",
+            upload_token: "上传成绩 Token",
+            qq_number: "QQ 号",
+            uuid: "游戏内 UUID",
+            anonymous_probe: "允许匿名查询",
         },
         term: {
             b50: "Best 50",
@@ -106,9 +129,12 @@ const messages = {
             register_success: "注册成功",
             register_failed: "注册失败，详情：",
             login_success: "登入成功",
-            login_failed: "登入成功，可能是用户名或者密码错误。详情： ",
+            login_failed: "登入失败，详情： ",
             get_my_info_success: "成功获取个人资料",
-            get_my_info_failed: "获取个人资料失败，详情："
+            get_my_info_failed: "获取个人资料失败，详情：",
+            token_expired: "认证信息已过期，尝试重新登入",
+            get_levels_success: "成功获取谱面信息",
+            get_levels_failed: "获取铺面信息失败，详情：",
         }
     }
 }

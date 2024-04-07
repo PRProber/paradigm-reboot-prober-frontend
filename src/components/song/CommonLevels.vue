@@ -59,6 +59,9 @@ const filterTableData = computed(() => {
             style="width: 100%"
             max-height="700"
         >
+          <template #empty>
+
+          </template>
           <el-table-column fixed prop="song_level_id" :label="$t('term.song_level_id')" width="100" sortable>
             <template #default="scope"> {{ scope.row.song_level_id }} </template>
           </el-table-column>
