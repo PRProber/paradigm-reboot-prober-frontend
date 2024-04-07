@@ -51,7 +51,7 @@ const rules = reactive({
 })
 
 const onSubmitRegisterForm = () => {
-  register(form.username, form.email, form.password).then((response) => {
+  register(form.username, form.email, form.password).then(() => {
     ElMessage({
       type: "success",
       message: i18n.t('message.register_success')

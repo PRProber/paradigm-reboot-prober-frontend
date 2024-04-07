@@ -5,8 +5,6 @@ import { useUserStore } from "@/utils/store";
 
 import LoginForm from "@/components/user/LoginForm.vue";
 import RegisterForm from "@/components/user/RegisterForm.vue";
-import {register} from "@/utils/api";
-
 const userStore = useUserStore()
 
 // TODO: check login status on mount
