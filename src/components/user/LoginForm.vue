@@ -29,7 +29,7 @@ const onSubmitLoginForm = () => {
   login(form.username, form.password).then((response) => {
     userStore.logged_in = true
     userStore.username = form.username
-    userStore.access_token = response.data.access_token
+    userStore.access_token = 'Bearer ' + response.data.access_token
     ElMessage({
       'type': 'success',
       'message': i18n.t('message.login_success')

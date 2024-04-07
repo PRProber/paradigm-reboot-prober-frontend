@@ -1,7 +1,7 @@
 <script setup>
 import { ref, computed } from "vue";
 import { ElMessage } from "element-plus";
-import {More, Refresh} from "@element-plus/icons-vue";
+import { More, Refresh } from "@element-plus/icons-vue";
 import SingleInfo from "@/components/song/SingleInfo.vue";
 import { getSingleSongInfo } from "@/utils/api";
 
@@ -59,7 +59,10 @@ const filterTableData = computed(() => {
             style="width: 100%"
             max-height="700"
         >
-          <el-table-column fixed prop="title" :label="$t('term.title')" sortable min-width="120">
+          <el-table-column fixed prop="song_level_id" :label="$t('term.song_level_id')" width="100" sortable>
+            <template #default="scope"> {{ scope.row.song_level_id }} </template>
+          </el-table-column>
+          <el-table-column prop="title" :label="$t('term.title')" sortable min-width="120">
             <template #default="scope">
               <el-link @click="onSingleInfo(scope.row.song_id)">{{ scope.row.title }}</el-link>
             </template>
