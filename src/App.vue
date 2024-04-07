@@ -7,7 +7,7 @@ const userStore = useUserStore()
 
 <template>
   <div id="app">
-    <el-container>
+    <el-container style="height: 100%">
       <el-header>
         <el-menu mode="horizontal" :ellipsis="false">
           <el-space>
@@ -33,7 +33,7 @@ const userStore = useUserStore()
       </el-header>
       <el-container>
         <el-aside width="auto">
-          <el-menu mode="vertical" style="height: 100vh" :router="true" default-active="0">
+          <el-menu mode="vertical" :router="true">
             <el-menu-item index="0" route="/best50">
               <el-icon><DataAnalysis /></el-icon>
               <template #title>{{ $t('term.b50') }}</template>
