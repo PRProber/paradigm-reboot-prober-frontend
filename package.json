@@ -12,6 +12,7 @@
     "axios": "^1.6.8",
     "element-plus": "^2.6.3",
     "pinia": "^2.1.7",
+    "pinia-plugin-persistedstate": "^3.2.1",
     "vue": "^3.3.4",
     "vue-i18n": "^9.11.0",
     "vue-router": "^4.3.0"

@@ -1,13 +1,11 @@
 import axios from "axios";
 import { useUserStore } from "@/utils/store";
-import { createPinia } from "pinia";
-
-const pinia = createPinia()
-const userStore = useUserStore(pinia)
+import { pinia } from "@/utils/store";
 
 const beforeRequest = config => {
-    const userStorage = JSON.parse(localStorage.getItem('user-store'))
-    userStorage && (config.headers.Authorization = userStorage['access_token'])
+    const userStore = useUserStore(pinia)
+    console.log("Before request " + userStore.access_token)
+    config.headers.Authorization = userStore.access_token
     return config
 }
 
@@ -22,10 +20,6 @@ let client = axios.create({
 })
 
 client.interceptors.request.use(beforeRequest)
-userStore.$subscribe((_, state) => {
-    localStorage.setItem('user-store', JSON.stringify({ ...state }))
-})
-
 export const login = (username, password) => {
     return client.post(
         '/user/login',
