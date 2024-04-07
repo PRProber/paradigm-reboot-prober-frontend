@@ -40,11 +40,20 @@ const cover_src = () => {
         <el-descriptions-item :label="$t('term.length')" label-class-name="bold-label">
           {{ props.song.length }}
         </el-descriptions-item>
+      </el-descriptions>
+      <el-descriptions :column="1">
         <el-descriptions-item :label="$t('term.difficulty')" label-class-name="bold-label">
           <el-space wrap>
             <el-tag type="primary">{{ 'Detected ' + props.song.song_levels[0].level }}</el-tag>
             <el-tag type="danger">{{'Invaded ' + props.song.song_levels[1].level }}</el-tag>
             <el-tag color="purple" type="info">{{ 'Massive ' + props.song.song_levels[2].level }}</el-tag>
+          </el-space>
+        </el-descriptions-item>
+        <el-descriptions-item :label="$t('term.level_design')" label-class-name="bold-label">
+          <el-space wrap>
+            <el-tag type="primary">{{ props.song.song_levels[0].level_design }}</el-tag>
+            <el-tag type="danger">{{ props.song.song_levels[1].level_design }}</el-tag>
+            <el-tag color="purple" type="info">{{ props.song.song_levels[2].level_design }}</el-tag>
           </el-space>
         </el-descriptions-item>
       </el-descriptions>
