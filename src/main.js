@@ -1,8 +1,6 @@
 import { createApp } from 'vue'
-import { createPinia } from "pinia";
 import { createRouter, createWebHashHistory } from "vue-router";
 import { createI18n } from "vue-i18n";
-import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 
 import App from './App.vue'
