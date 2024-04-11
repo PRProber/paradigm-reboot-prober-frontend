@@ -21,6 +21,7 @@ export const useStore = defineStore('store', {
     state: () => {
         return {
             levels: null,
+            uploadList: [],
         }
     }
 })

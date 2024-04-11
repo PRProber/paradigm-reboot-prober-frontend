@@ -41,7 +41,7 @@ const onRefreshUploadToken = () => {
 <template>
   <el-form :model="form" label-width="auto">
     <el-form-item :label="$t('auth.username')">
-      <el-input v-model="form.username" readonly></el-input>
+      {{ form.username }}
     </el-form-item>
     <el-form-item :label="$t('auth.upload_token')">
       <el-input v-model="form.upload_token" readonly>
@@ -51,7 +51,7 @@ const onRefreshUploadToken = () => {
       </el-input>
     </el-form-item>
     <el-form-item :label="$t('auth.email')">
-      <el-input v-model="form.email" readonly></el-input>
+      {{ form.email }}
     </el-form-item>
     <el-form-item :label="$t('auth.qq_number')">
       <el-input v-model.number="form.qq_number"></el-input>

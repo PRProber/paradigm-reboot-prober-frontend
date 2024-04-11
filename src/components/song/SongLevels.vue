@@ -26,7 +26,9 @@ const refreshLevelInfo = () => {
 </script>
 
 <template>
-  <CommonLevels :levels="store.levels" @refreshLevels="refreshLevelInfo"/>
+  <div style="height: 100%">
+    <CommonLevels :levels="store.levels" @refreshLevels="refreshLevelInfo"/>
+  </div>
 </template>
 
 <style scoped>

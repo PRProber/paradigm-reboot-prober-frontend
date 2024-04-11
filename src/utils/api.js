@@ -73,11 +73,11 @@ export const getAllBestRecords = (username) => {
 }
 
 export const getBest50Records = (underflow = 0) => {
-    return client.get('/user/records', {
+    return client.get('/records', {
         params: {b50: true, underflow: underflow}
     })
 }
 
-export const postRecord = (formData = 0) => {
-    return client.post('/user/records', formData)
+export const postRecord = (formData) => {
+    return client.post('/records', formData)
 }

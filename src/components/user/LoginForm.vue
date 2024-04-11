@@ -1,5 +1,5 @@
 <script setup>
-import { reactive, defineEmits } from "vue";
+import { reactive } from "vue";
 import { useI18n } from "vue-i18n";
 
 import { login } from "@/utils/api";
@@ -18,10 +18,10 @@ const form = reactive({
 
 const rules = reactive({
   username: [
-    { required: true }
+    { required: true, message: i18n.t('message.required'), trigger: 'blur' }
   ],
   password: [
-    { required: true }
+    { required: true, message: i18n.t('message.required'), trigger: 'blur' }
   ]
 })
 

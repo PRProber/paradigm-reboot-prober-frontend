@@ -12,6 +12,7 @@ import { pinia } from "@/utils/store";
 import BestPlayRecords from "@/components/record/BestPlayRecords.vue";
 
 import "element-plus/theme-chalk/el-message-box.css"
+import 'element-plus/theme-chalk/dark/css-vars.css'
 import "element-plus/theme-chalk/el-message.css"
 
 const app= createApp(App)
@@ -19,19 +20,19 @@ const app= createApp(App)
 const routes = [
     {
         path: '/best50',
-        component: Best50Records
+        component: Best50Records,
     },
     {
         path: '/records',
-        component: PlayRecords
+        component: PlayRecords,
     },
     {
         path: '/best',
-        component: BestPlayRecords
+        component: BestPlayRecords,
     },
     {
         path: '/songs',
-        component: SongLevels
+        component: SongLevels,
     },
 ]
 const router = createRouter({

@@ -5,7 +5,8 @@ const messages = {
             yes: "Yes",
             no: "No",
             save: "Save",
-            cancel: "Cancel"
+            cancel: "Cancel",
+            upload_record: "Upload Record",
         },
         auth: {
             login: "Login",
@@ -45,7 +46,10 @@ const messages = {
             album: "Album",
             genre: "Genre",
             length: "Length",
-            notes: "Notes"
+            notes: "Notes",
+            score: "Score",
+            replace: "Replace the Best Record",
+            upload_list: "Upload List",
         },
         message: {
             welcome: "Welcome, {username}! ",
@@ -65,7 +69,15 @@ const messages = {
             get_levels_failed: "Failed to get level info",
             get_my_info_success: "Successfully get user profile",
             get_my_info_failed: "Failed to get user profile. Details: ",
-            token_expired: "Access token has expired, please re-login"
+            token_expired: "Access token has expired, please re-login",
+            post_record_success: "Successfully upload record",
+            post_record_failed: "Failed to upload record. Details: ",
+            score_out_of_range: "Please input a score between 0 and 1010000",
+            song_detail: "Song details",
+            quick_upload: "Quick upload",
+            add_to_upload_list: "Add to upload list",
+            add_to_upload_list_success: "Successfully add to upload list",
+            add_to_upload_list_failed: "Failed add to upload list, this level has already in the list"
         }
     },
     zh_cn: {
@@ -75,6 +87,7 @@ const messages = {
             no: "否",
             save: "保存",
             cancel: "取消",
+            upload_record: "上传记录",
         },
         auth: {
             login: "登入",
@@ -114,7 +127,10 @@ const messages = {
             album: "专辑",
             genre: "流派",
             length: "曲长",
-            notes: "音符数量"
+            notes: "音符数量",
+            score: "分数",
+            replace: "替换最佳纪录",
+            upload_list: "待上传列表",
         },
         message: {
             welcome: "欢迎，{username}！",
@@ -135,6 +151,14 @@ const messages = {
             token_expired: "认证信息已过期，尝试重新登入",
             get_levels_success: "成功获取谱面信息",
             get_levels_failed: "获取铺面信息失败，详情：",
+            post_record_success: "上传成绩成功",
+            post_record_failed: "上传成绩失败，详情：",
+            score_out_of_range: "请输入 0 到 1010000 间的分数",
+            song_detail: "查看歌曲详情",
+            quick_upload: "快捷上传",
+            add_to_upload_list: "添加到待上传列表",
+            add_to_upload_list_success: "成功加入待上传列表",
+            add_to_upload_list_failed: "加入待上传列表失败，该谱面已经存在"
         }
     }
 }

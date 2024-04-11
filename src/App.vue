@@ -97,16 +97,17 @@ const onClickRegisterBtn = () => {
 
 <template>
   <div id="app">
-    <el-container style="height: 100%">
-      <el-dialog v-model="registerDialogVisible" :title="$t('auth.register')">
+    <el-container style="height: 91vh">
+      <el-dialog v-model="registerDialogVisible" :title="$t('auth.register')" destroy-on-close append-to-body>
         <RegisterForm @register-success="onRegisterSuccess"/>
       </el-dialog>
-      <el-dialog v-model="loginDialogVisible" :title="$t('auth.login')">
+      <el-dialog v-model="loginDialogVisible" :title="$t('auth.login')" destroy-on-close append-to-body>
         <LoginForm @login-success="onLoginSuccess"/>
       </el-dialog>
-      <el-dialog v-model="profileDialogVisible" :title="$t('auth.account')" destroy-on-close>
+      <el-dialog v-model="profileDialogVisible" :title="$t('auth.account')" destroy-on-close append-to-body>
         <UserProfile @cancel="profileDialogVisible=false"/>
       </el-dialog>
+
       <el-header>
         <el-menu mode="horizontal" :ellipsis="false">
           <el-space>
@@ -133,9 +134,9 @@ const onClickRegisterBtn = () => {
           </div>
         </el-menu>
       </el-header>
-      <el-container>
-        <el-aside width="auto">
-          <el-menu mode="vertical" :router="true">
+      <el-container style="height: 100%">
+        <el-aside width="auto" style="height: 100%">
+          <el-menu mode="vertical" :router="true" style="height: 100%">
             <el-menu-item index="0" route="/best50">
               <el-icon><DataAnalysis /></el-icon>
               <template #title>{{ $t('term.b50') }}</template>
@@ -154,8 +155,8 @@ const onClickRegisterBtn = () => {
             </el-menu-item>
           </el-menu>
         </el-aside>
-        <el-main>
-          <router-view></router-view>
+        <el-main style="height: 100%">
+          <router-view style="height: 100%"></router-view>
         </el-main>
       </el-container>
     </el-container>
