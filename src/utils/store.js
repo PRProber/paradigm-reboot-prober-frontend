@@ -1,5 +1,8 @@
-import { defineStore } from "pinia";
-import { ref } from "vue"
+import { createPinia, defineStore } from "pinia";
+import piniaPluginPersistedstate from "pinia-plugin-persistedstate";
+
+export const pinia = createPinia()
+pinia.use(piniaPluginPersistedstate)
 
 export const useUserStore = defineStore('userStore', {
     state: () => {
@@ -7,7 +10,18 @@ export const useUserStore = defineStore('userStore', {
             username: '',
             access_token: '',
             is_admin: false,
-            logged_in: false
+            logged_in: false,
+            profile: null
+        }
+    },
+    persist: true
+})
+
+export const useStore = defineStore('store', {
+    state: () => {
+        return {
+            levels: null,
+            uploadList: [],
         }
     }
 })
