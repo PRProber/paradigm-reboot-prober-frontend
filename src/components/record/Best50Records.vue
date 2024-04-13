@@ -1,11 +1,122 @@
 <script setup>
+import { reactive, onMounted, computed } from 'vue'
+import Best50StatisticsPanel from "@/components/record/Best50StatisticsPanel.vue";
+import { getBestRecords } from "@/utils/api";
+import { ElMessage } from "element-plus";
+import { useI18n } from "vue-i18n";
+import { useUserStore } from "@/utils/store";
+import CommonRecords from "@/components/record/CommonRecords.vue";
+import LevelRatingScatterChart from "@/components/chart/LevelRatingScatterChart.vue";
+import 'element-plus/theme-chalk/display.css'
+import {Download, Refresh, UploadFilled} from "@element-plus/icons-vue";
 
+const i18n = useI18n()
+const userStore = useUserStore()
+
+const records = reactive({
+  b35: [],
+  b15: []
+})
+
+const b50Rating = computed(() => {
+  return b35Rating.value + b15Rating.value
+})
+
+const b35Rating = computed(() => {
+  return (records.b35.reduce((sum, e) => sum + e.rating, 0.0))
+})
+
+const b15Rating = computed(() => {
+  return records.b15.reduce((sum, e) => sum + e.rating, 0.0)
+})
+
+const b35Records = computed(() => {
+  return records.b35
+})
+
+const b15Records = computed(() => {
+  return records.b15
+})
+
+const refreshRecords = () => {
+  getBestRecords(userStore.username).then(response => {
+    records.b35 = response.data.b35
+    records.b15 = response.data.b15
+    ElMessage({
+      'type': 'success',
+      'message': i18n.t('message.get_record_success')
+    })
+    console.log("Parent")
+    console.log(b35Rating.value)
+    console.log(b15Rating.value)
+  }).catch(error => {
+    ElMessage({
+      'type': 'error',
+      'message': i18n.t('message.get_record_failed') + error.response.data.detail
+    })
+  })
+}
+
+onMounted(() => {
+  refreshRecords()
+})
 </script>
 
 <template>
-Best 50!
+  <el-scrollbar>
+    <el-row justify="end">
+      <el-col :span="2">
+        <el-tooltip :content="$t('term.export_b50_image')">
+          <el-button :icon="Download" text/>
+        </el-tooltip>
+        <el-tooltip :content="$t('common.refresh')">
+          <el-button @click="refreshRecords" :icon="Refresh" text/>
+        </el-tooltip>
+      </el-col>
+    </el-row>
+    <el-row justify="center" style="margin-top:1em; margin-bottom: 2em;">
+      <el-col :span="4" class="hidden-sm-and-down">
+        <h4>Overview</h4>
+      </el-col>
+      <Best50StatisticsPanel
+          :b50="b50Rating" :b35="b35Rating" :b15="b15Rating"
+      />
+    </el-row>
+    <el-row justify="space-evenly" >
+      <el-col :span="11" :md="11" :sm="22" :xs="22">
+        <el-card>
+          <el-text size="large"> {{ $t('term.b35') }} </el-text>
+          <el-divider />
+          <el-text>{{$t('term.level_rating_distribution')}}</el-text>
+          <LevelRatingScatterChart :records="b35Records"/>
+          <el-divider />
+          <CommonRecords :records="b35Records"/>
+        </el-card>
+      </el-col>
+      <el-col :span="11" class="hidden-sm-and-down">
+        <el-card>
+          <el-text size="large" type="primary"> {{ $t('term.b15') }} </el-text>
+          <el-divider />
+          <el-text>{{$t('term.level_rating_distribution')}}</el-text>
+          <LevelRatingScatterChart :records="b15Records"/>
+          <el-divider />
+          <CommonRecords :records="b15Records"/>
+        </el-card>
+      </el-col>
+    </el-row>
+    <el-row justify="space-evenly" class="hidden-md-and-up" style="margin-top: 1em">
+      <el-col :span="22">
+        <el-card>
+          <el-text size="large" class="card-title-text" type="primary"> {{ $t('term.b15') }} </el-text>
+          <el-divider />
+          <el-text>{{$t('term.level_rating_distribution')}}</el-text>
+          <LevelRatingScatterChart :records="b15Records"/>
+          <el-divider />
+          <CommonRecords :records="b15Records"/>
+        </el-card>
+      </el-col>
+    </el-row>
+  </el-scrollbar>
 </template>
-
 <style scoped>
-
 </style>

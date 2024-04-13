@@ -11,7 +11,6 @@ const i18n = useI18n()
 const emit = defineEmits(['post-success', 'cancel'])
 const props = defineProps(['title', 'difficulty', 'level', 'song_level_id'])
 const form = reactive({
-  username: '',
   song_level_id: 0,
   score: 0,
   replace: false,
@@ -26,14 +25,12 @@ const rules = reactive({
 })
 
 onMounted(() => {
-  form.username = userStore.username
   form.song_level_id = props.song_level_id
   form.score = 0
 })
 
 const onSubmit = () => {
-  // TODO: API 更新之后把 form 换成 [form]
-  postRecord(form).then((response) => {
+  postRecord(userStore.username, [form]).then((response) => {
     ElMessage({
       type: "success",
       message: i18n.t('message.post_record_success')

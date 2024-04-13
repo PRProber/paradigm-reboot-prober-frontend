@@ -66,18 +66,17 @@ export const getAllRecords = (username) => {
     return client.get('/records/' + username)
 }
 
-export const getAllBestRecords = (username) => {
+export const getBestRecords = (username) => {
     return client.get('/records/' + username, {
         params: { best: true }
     })
 }
 
-export const getBest50Records = (underflow = 0) => {
-    return client.get('/records', {
-        params: {b50: true, underflow: underflow}
-    })
-}
-
-export const postRecord = (formData) => {
-    return client.post('/records', formData)
+export const postRecord = (username, formData) => {
+    return client.post(
+            '/records/'+username,
+            {
+                play_records: formData
+            }
+        )
 }

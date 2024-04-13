@@ -33,7 +33,7 @@ const rules = reactive({
   username: [
     { required: true, message: i18n.t('message.required'), trigger: 'blur' },
     { pattern: /^[A-Za-z0-9]*$/, message: i18n.t('message.username_character'), trigger: 'blur' },
-    { min: 6, max: 10, message: i18n.t('message.username_length'), trigger: 'blur'}
+    { min: 6, max: 12, message: i18n.t('message.username_length'), trigger: 'blur'}
   ],
   password: [
     { required: true, message: i18n.t('message.required'), trigger: 'blur' },

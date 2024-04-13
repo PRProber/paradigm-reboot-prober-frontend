@@ -5,6 +5,8 @@ import { ElMessage } from "element-plus";
 import { useStore } from "@/utils/store";
 import { getAllSongLevels } from "@/utils/api"
 import CommonLevels from "@/components/song/CommonLevels.vue";
+import {Download, Refresh, ShoppingCart} from "@element-plus/icons-vue";
+import UploadListPreview from "@/components/record/UploadList.vue";
 
 const store = useStore()
 const i18n = useI18n()
@@ -26,9 +28,29 @@ const refreshLevelInfo = () => {
 </script>
 
 <template>
-  <div style="height: 100%">
-    <CommonLevels :levels="store.levels" @refreshLevels="refreshLevelInfo"/>
-  </div>
+  <el-row justify="end">
+      <el-col :span="2">
+        <el-popover
+            placement="bottom"
+            :title="$t('term.upload_list')"
+            :width="550"
+            trigger="hover"
+        >
+          <template #reference>
+            <el-button :icon="ShoppingCart" text/>
+          </template>
+          <UploadListPreview/>
+        </el-popover>
+        <el-tooltip :content="$t('common.refresh')">
+          <el-button @click="refreshLevelInfo" :icon="Refresh" text/>
+        </el-tooltip>
+      </el-col>
+  </el-row>
+  <el-row justify="center" style="height: 90%">
+    <el-col style="height: 100%">
+        <CommonLevels :levels="store.levels" @refreshLevels="refreshLevelInfo"/>
+    </el-col>
+  </el-row>
 </template>
 
 <style scoped>
