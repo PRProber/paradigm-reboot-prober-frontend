@@ -80,3 +80,16 @@ export const postRecord = (username, formData) => {
             }
         )
 }
+
+export const getBest50Image = (username) => {
+    return client.get(
+        '/records/'+username+'/export/b50',
+        { responseType: "blob" }
+    )
+}
+
+export const getB50Trending = (username, scope = 'month') => {
+    return client.get('/statistics/' + username + '/b50', {
+        params: { scope: scope }
+    })
+}

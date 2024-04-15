@@ -3,7 +3,7 @@
 </script>
 
 <template>
-Play Records!
+  PlayRecords
 </template>
 
 <style scoped>

@@ -34,7 +34,7 @@ const option = ref({
   },
   tooltip: {
     position: 'top',
-        formatter: function (params) {
+    formatter: function (params) {
       return 'Level: ' + params.value[0] + '<br>Rating: ' + params.value[1];
     }
   },
@@ -52,8 +52,10 @@ watch(() => props.records, (newValue, oldValue) => {
     props.records.forEach((value) => {
       data.push([value.song_level.level, value.rating])
     })
-    console.log(data)
     option.value.series.data = data
+  }
+  else {
+    option.value.series.data = []
   }
 })
 </script>
