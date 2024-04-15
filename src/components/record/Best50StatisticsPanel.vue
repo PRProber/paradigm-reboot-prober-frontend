@@ -31,10 +31,10 @@ const b15Trans = useTransition(b15Value, {
     <el-statistic class="statistic-panel" :precision="4" title="Best 50" :value="b50Trans"/>
   </el-col>
   <el-col :span="4">
-    <el-statistic class="statistic-panel" :precision="4" title="Best 35 Avg." :value="b35Trans * 50.0 / 35.0"/>
+    <el-statistic class="statistic-panel" :precision="4" title="Best 35 Avg." :value="b35Trans"/>
   </el-col>
   <el-col :span="4">
-    <el-statistic class="statistic-panel" :precision="4" title="Best 15 Avg." :value="b15Trans * 50.0 / 15.0"/>
+    <el-statistic class="statistic-panel" :precision="4" title="Best 15 Avg." :value="b15Trans"/>
   </el-col>
 </template>
 

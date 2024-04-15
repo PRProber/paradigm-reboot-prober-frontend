@@ -28,9 +28,10 @@ const onSubmit = () => {
     })
     store.uploadList = store.uploadList.filter(() => false)
   }).catch((error) => {
+    const details = error.response === undefined ? '' : error.response.data.detail
     ElMessage({
       type: "error",
-      message: i18n.t('message.post_record_failed') + error.response.data.detail
+      message: i18n.t('message.post_record_failed') + details
     })
   })
 }

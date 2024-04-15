@@ -6,7 +6,7 @@ import SingleInfo from "@/components/song/SingleInfo.vue";
 import { getSingleSongInfo } from "@/utils/api";
 import QuickPostRecordForm from "@/components/record/QuickUploadRecordForm.vue";
 import { useStore } from "@/utils/store";
-import {useI18n} from "vue-i18n";
+import { useI18n } from "vue-i18n";
 
 const props = defineProps(['records'])
 const singleSongInfoDialogVisible = ref(false)
@@ -30,8 +30,9 @@ const onSingleInfo = songId => {
   getSingleSongInfo(songId).then((response) => {
     singleSongInfo.value = response.data
   }).catch( error => {
+    const details = error.response === undefined ? '' : error.response.data.detail
     ElMessage({
-      message: "Failed to get single info. Details: " + error.toString(),
+      message: "Failed to get single info. Details: " + details,
       type: "error"
     })
   })
@@ -124,7 +125,7 @@ const tableData = computed(() => {
     </el-table-column>
     <el-table-column prop="rating" label="Rt." sortable>
       <template #default="scope">
-        {{ (scope.row.rating * 50).toFixed(2) }}
+        {{ scope.row.rating.toFixed(2) }}
       </template>
     </el-table-column>
     <el-table-column align="right" :width="40">

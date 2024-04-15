@@ -19,15 +19,15 @@ const records = reactive({
 })
 
 const b50Rating = computed(() => {
-  return b35Rating.value + b15Rating.value
+  return (records.b35.reduce((sum, e) => sum + e.rating, 0) + records.b15.reduce((sum, e) => sum + e.rating, 0)) / 50
 })
 
 const b35Rating = computed(() => {
-  return (records.b35.reduce((sum, e) => sum + e.rating, 0.0))
+  return (records.b35.reduce((sum, e) => sum + e.rating, 0)) / 35.0
 })
 
 const b15Rating = computed(() => {
-  return records.b15.reduce((sum, e) => sum + e.rating, 0.0)
+  return records.b15.reduce((sum, e) => sum + e.rating, 0) / 15.0
 })
 
 const b35Records = computed(() => {
@@ -40,8 +40,10 @@ const b15Records = computed(() => {
 
 const refreshRecords = () => {
   getBestRecords(userStore.username).then(response => {
-    records.b35 = response.data.b35
-    records.b15 = response.data.b15
+    records.b35 = response.data.filter(e => !e.song_level.b15)
+    records.b15 = response.data.filter(e => e.song_level.b15)
+    records.b35.forEach(e => e.rating /= 100)
+    records.b15.forEach(e => e.rating /= 100)
     ElMessage({
       'type': 'success',
       'message': i18n.t('message.get_record_success')
@@ -50,9 +52,10 @@ const refreshRecords = () => {
     console.log(b35Rating.value)
     console.log(b15Rating.value)
   }).catch(error => {
+    const details = error.response === undefined ? '' : error.response.data.detail
     ElMessage({
       'type': 'error',
-      'message': i18n.t('message.get_record_failed') + error.response.data.detail
+      'message': i18n.t('message.get_record_failed') + details
     })
   })
 }

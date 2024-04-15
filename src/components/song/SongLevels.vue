@@ -46,9 +46,9 @@ const refreshLevelInfo = () => {
         </el-tooltip>
       </el-col>
   </el-row>
-  <el-row justify="center" style="height: 90%">
-    <el-col style="height: 100%">
-        <CommonLevels :levels="store.levels" @refreshLevels="refreshLevelInfo"/>
+  <el-row justify="center" style="height: 90%; margin-top: 1em">
+    <el-col :span="22" style="height: 100%">
+      <CommonLevels :levels="store.levels" @refreshLevels="refreshLevelInfo"/>
     </el-col>
   </el-row>
 </template>

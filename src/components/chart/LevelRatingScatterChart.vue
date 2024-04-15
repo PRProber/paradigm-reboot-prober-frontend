@@ -50,7 +50,7 @@ watch(() => props.records, (newValue, oldValue) => {
   if (props.records !== null) {
     let data = []
     props.records.forEach((value) => {
-      data.push([value.song_level.level, value.rating * 50])
+      data.push([value.song_level.level, value.rating])
     })
     console.log(data)
     option.value.series.data = data
