@@ -1,11 +1,12 @@
 <script setup>
 import { useI18n } from "vue-i18n";
 import { ElMessage } from "element-plus";
+import { onBeforeUnmount } from "vue";
 
 import { useStore } from "@/utils/store";
 import { getAllSongLevels } from "@/utils/api"
 import CommonLevels from "@/components/song/CommonLevels.vue";
-import {Download, Refresh, ShoppingCart} from "@element-plus/icons-vue";
+import { Refresh, ShoppingCart} from "@element-plus/icons-vue";
 import UploadListPreview from "@/components/record/UploadList.vue";
 
 const store = useStore()
@@ -25,10 +26,15 @@ const refreshLevelInfo = () => {
     })
   })
 }
+
+onBeforeUnmount(() => {
+
+})
 </script>
 
 <template>
-  <el-row justify="end">
+  <div style="height: 100%">
+    <el-row justify="end">
       <el-col :span="2">
         <el-popover
             placement="bottom"
@@ -45,12 +51,13 @@ const refreshLevelInfo = () => {
           <el-button @click="refreshLevelInfo" :icon="Refresh" text/>
         </el-tooltip>
       </el-col>
-  </el-row>
-  <el-row justify="center" style="height: 90%; margin-top: 1em">
-    <el-col :span="22" style="height: 100%">
-      <CommonLevels :levels="store.levels" @refreshLevels="refreshLevelInfo"/>
-    </el-col>
-  </el-row>
+    </el-row>
+    <el-row justify="center" style="height: 90%; margin-top: 1em">
+      <el-col :span="22" style="height: 100%">
+        <CommonLevels :levels="store.levels" @refreshLevels="refreshLevelInfo"/>
+      </el-col>
+    </el-row>
+  </div>
 </template>
 
 <style scoped>

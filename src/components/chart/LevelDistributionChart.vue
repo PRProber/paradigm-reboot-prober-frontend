@@ -16,7 +16,7 @@ const props = defineProps({
   records: Array
 })
 
-watch(() => props.records, (newValue, oldValue) => {
+watch(() => props.records, (newValue) => {
   if (newValue !== null) {
     const map = new Map()
     const levelList = [], countList = []
@@ -32,15 +32,16 @@ watch(() => props.records, (newValue, oldValue) => {
     option.value.xAxis[0].data = levelList
     option.value.series[0].data = countList
   }
+  else {
+    option.value.xAxis[0].data = []
+    option.value.series[0].data = []
+  }
 })
 
 const option = ref({
   backgroundColor: '',
   tooltip: {
-    trigger: 'axis',
-    axisPointer: {
-      type: 'shadow'
-    }
+    trigger: 'top'
   },
   grid: {
     left: '3%',
