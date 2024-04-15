@@ -15,7 +15,6 @@ const userStore = useUserStore()
 const store = useStore()
 const i18n = useI18n()
 
-// TODO: check login status on mount
 onMounted(() => {
   getMyInfo().then(response => {
     userStore.profile = response.data
@@ -36,7 +35,7 @@ onMounted(() => {
         "type": "warning",
         "message": i18n.t("message.token_expired")
       })
-      userStore.logged_in = false
+      userStore.$reset()
     }
   })
   getAllSongLevels().then(response => {

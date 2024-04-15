@@ -100,9 +100,9 @@ onMounted(() => {
           <el-text size="large"> {{ $t('term.b35') }} </el-text>
           <el-divider />
           <el-text>{{$t('term.level_rating_distribution')}}</el-text>
-          <LevelRatingScatterChart :records="b35Records"/>
+          <LevelRatingScatterChart :records="records.b35"/>
           <el-divider />
-          <CommonRecords :records="b35Records"/>
+          <CommonRecords :records="records.b35"/>
         </el-card>
       </el-col>
       <el-col :span="11" class="hidden-sm-and-down">
@@ -110,9 +110,9 @@ onMounted(() => {
           <el-text size="large" type="primary"> {{ $t('term.b15') }} </el-text>
           <el-divider />
           <el-text>{{$t('term.level_rating_distribution')}}</el-text>
-          <LevelRatingScatterChart :records="b15Records"/>
+          <LevelRatingScatterChart :records="records.b15"/>
           <el-divider />
-          <CommonRecords :records="b15Records"/>
+          <CommonRecords :records="records.b35"/>
         </el-card>
       </el-col>
     </el-row>
