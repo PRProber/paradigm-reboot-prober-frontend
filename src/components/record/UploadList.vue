@@ -1,11 +1,39 @@
 <script setup>
-import { useStore } from "@/utils/store";
+import {useStore, useUserStore} from "@/utils/store";
 import { Delete } from "@element-plus/icons-vue";
+import { postRecord } from "@/utils/api";
+import {ElMessage} from "element-plus";
+import { useI18n } from "vue-i18n";
 
 const store = useStore()
+const userStore = useUserStore()
+const i18n = useI18n()
 
 const onClickDelete = (song_level_id) => {
   store.uploadList = store.uploadList.filter(item => item.song_level_id !== song_level_id)
+}
+
+const onSubmit = () => {
+  const form = []
+  store.uploadList.forEach(x => {
+    form.push({
+      song_level_id: x.song_level_id,
+      score: x.score
+    })
+  })
+  postRecord(userStore.username, form).then(() => {
+    ElMessage({
+      type: "success",
+      message: i18n.t('message.post_record_success')
+    })
+    store.uploadList = store.uploadList.filter(() => false)
+  }).catch((error) => {
+    const details = error.response === undefined ? '' : error.response.data.detail
+    ElMessage({
+      type: "error",
+      message: i18n.t('message.post_record_failed') + details
+    })
+  })
 }
 </script>
 
@@ -36,7 +64,7 @@ const onClickDelete = (song_level_id) => {
       </template>
     </el-table-column>
   </el-table>
-  <el-button type="primary" style="margin-top: 1em">{{ $t('common.submit') }}</el-button>
+  <el-button type="primary" style="margin-top: 1em" @click="onSubmit">{{ $t('common.submit') }}</el-button>
 </template>
 
 <style scoped>

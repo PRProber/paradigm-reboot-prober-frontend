@@ -6,6 +6,7 @@ const messages = {
             no: "No",
             save: "Save",
             cancel: "Cancel",
+            refresh: "Refresh",
             upload_record: "Upload Record",
         },
         auth: {
@@ -50,6 +51,9 @@ const messages = {
             score: "Score",
             replace: "Replace the Best Record",
             upload_list: "Upload List",
+            level_distribution: "Level Distribution",
+            level_rating_distribution: "Level-rating Distribution",
+            export_b50_image: "Export B50 Table (Image)"
         },
         message: {
             welcome: "Welcome, {username}! ",
@@ -70,6 +74,8 @@ const messages = {
             get_my_info_success: "Successfully get user profile",
             get_my_info_failed: "Failed to get user profile. Details: ",
             token_expired: "Access token has expired, please re-login",
+            get_record_success: "Successfully get records",
+            get_record_failed: "Failed to get records. Details: ",
             post_record_success: "Successfully upload record",
             post_record_failed: "Failed to upload record. Details: ",
             score_out_of_range: "Please input a score between 0 and 1010000",
@@ -87,6 +93,7 @@ const messages = {
             no: "否",
             save: "保存",
             cancel: "取消",
+            refresh: "刷新",
             upload_record: "上传记录",
         },
         auth: {
@@ -131,6 +138,9 @@ const messages = {
             score: "分数",
             replace: "替换最佳纪录",
             upload_list: "待上传列表",
+            level_distribution: "定数分布",
+            level_rating_distribution: "定数-Rating 分布",
+            export_b50_image: "导出 B50 图片"
         },
         message: {
             welcome: "欢迎，{username}！",
@@ -151,6 +161,8 @@ const messages = {
             token_expired: "认证信息已过期，尝试重新登入",
             get_levels_success: "成功获取谱面信息",
             get_levels_failed: "获取铺面信息失败，详情：",
+            get_record_success: "成功获取成绩",
+            get_record_failed: "获取成绩失败，详情： ",
             post_record_success: "上传成绩成功",
             post_record_failed: "上传成绩失败，详情：",
             score_out_of_range: "请输入 0 到 1010000 间的分数",

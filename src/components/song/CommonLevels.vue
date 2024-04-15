@@ -116,7 +116,7 @@ const filterTableData = computed(() => {
     <el-table-column fixed prop="song_level_id" :label="$t('term.song_level_id')" width="100" sortable>
       <template #default="scope"> {{ scope.row.song_level_id }} </template>
     </el-table-column>
-    <el-table-column prop="title" :label="$t('term.title')" sortable>
+    <el-table-column fixed prop="title" :label="$t('term.title')" sortable>
       <template #default="scope">
         <el-link @click="onSingleInfo(scope.row.song_id)">{{ scope.row.title }}</el-link>
       </template>
@@ -150,7 +150,7 @@ const filterTableData = computed(() => {
 <!--        {{ scope.row.album }}-->
 <!--      </template>-->
 <!--    </el-table-column>-->
-    <el-table-column
+    <el-table-column fixed
         prop="difficulty"
         :label="$t('term.difficulty')"
         :filters="[
@@ -180,26 +180,7 @@ const filterTableData = computed(() => {
     </el-table-column>
     <el-table-column align="right">
       <template #header>
-        <el-input v-model="search" :placeholder="$t('message.search')">
-          <template #prepend>
-            <el-popover
-                placement="bottom"
-                :title="$t('term.upload_list')"
-                :width="550"
-                trigger="hover"
-            >
-              <template #reference>
-                <el-icon>
-                  <ShoppingCart/>
-                </el-icon>
-              </template>
-              <UploadListPreview/>
-            </el-popover>
-          </template>
-          <template #append>
-            <el-button :icon="Refresh" text @click="$emit('refreshLevels')"></el-button>
-          </template>
-        </el-input>
+        <el-input v-model="search" :placeholder="$t('message.search')"/>
       </template>
       <template #default="scope">
         <el-space>

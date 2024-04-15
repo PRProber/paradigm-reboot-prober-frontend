@@ -15,7 +15,6 @@ const userStore = useUserStore()
 const store = useStore()
 const i18n = useI18n()
 
-// TODO: check login status on mount
 onMounted(() => {
   getMyInfo().then(response => {
     userStore.profile = response.data
@@ -36,7 +35,7 @@ onMounted(() => {
         "type": "warning",
         "message": i18n.t("message.token_expired")
       })
-      userStore.logged_in = false
+      userStore.$reset()
     }
   })
   getAllSongLevels().then(response => {
@@ -56,10 +55,10 @@ onMounted(() => {
 const loginDialogVisible = ref(false)
 const registerDialogVisible = ref(false)
 const profileDialogVisible = ref(false)
+const isCollapse = ref(true)
 
 const onClickLogoutBtn = () => {
-  userStore.access_token = ''
-  userStore.logged_in = false
+  userStore.$reset()
 }
 
 const onClickLoginBtn = () => {
@@ -111,8 +110,8 @@ const onClickRegisterBtn = () => {
       <el-header>
         <el-menu mode="horizontal" :ellipsis="false">
           <el-space>
-            <h3>Paradigm: Reboot</h3>
-            <h3 style="color: dodgerblue"> Prober</h3>
+            <h3>PR</h3>
+            <h3 style="color: dodgerblue">Prober</h3>
           </el-space>
           <div class="flex-grow" />
           <div style="margin-top: auto; margin-bottom: auto">
@@ -136,18 +135,18 @@ const onClickRegisterBtn = () => {
       </el-header>
       <el-container style="height: 100%">
         <el-aside width="auto" style="height: 100%">
-          <el-menu mode="vertical" :router="true" style="height: 100%">
+          <el-menu mode="vertical" :router="true" style="height: 100%" :collapse="isCollapse" default-active="0">
             <el-menu-item index="0" route="/best50">
               <el-icon><DataAnalysis /></el-icon>
               <template #title>{{ $t('term.b50') }}</template>
             </el-menu-item>
-            <el-menu-item index="1" route="/best">
-              <el-icon><Medal /></el-icon>
-              <template #title>{{ $t('term.best_records') }} </template>
-            </el-menu-item>
-            <el-menu-item index="2" route="/songs">
+            <el-menu-item index="1" route="/songs">
               <el-icon><PieChart /></el-icon>
               <template #title>{{ $t('term.song_levels') }}</template>
+            </el-menu-item>
+            <el-menu-item index="2" route="/best">
+              <el-icon><Medal /></el-icon>
+              <template #title>{{ $t('term.best_records') }} </template>
             </el-menu-item>
             <el-menu-item index="3" route="/records">
               <el-icon><Memo /></el-icon>
@@ -156,7 +155,7 @@ const onClickRegisterBtn = () => {
           </el-menu>
         </el-aside>
         <el-main style="height: 100%">
-          <router-view style="height: 100%"></router-view>
+          <router-view></router-view>
         </el-main>
       </el-container>
     </el-container>

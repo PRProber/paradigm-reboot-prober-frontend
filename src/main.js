@@ -14,6 +14,7 @@ import BestPlayRecords from "@/components/record/BestPlayRecords.vue";
 import "element-plus/theme-chalk/el-message-box.css"
 import 'element-plus/theme-chalk/dark/css-vars.css'
 import "element-plus/theme-chalk/el-message.css"
+import 'element-plus/theme-chalk/display.css'
 
 const app= createApp(App)
 
