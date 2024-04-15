@@ -110,7 +110,7 @@ const onClickRegisterBtn = () => {
       <el-header>
         <el-menu mode="horizontal" :ellipsis="false">
           <el-space>
-            <h3>PR</h3>
+            <h3>Paradigm</h3>
             <h3 style="color: dodgerblue">Prober</h3>
           </el-space>
           <div class="flex-grow" />

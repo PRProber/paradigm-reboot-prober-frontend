@@ -27,13 +27,13 @@ const b15Trans = useTransition(b15Value, {
 </script>
 
 <template>
-  <el-col :span="4">
+  <el-col :span="4" :xs="6">
     <el-statistic class="statistic-panel" :precision="4" title="Best 50" :value="b50Trans"/>
   </el-col>
-  <el-col :span="4">
+  <el-col :span="4" :xs="6">
     <el-statistic class="statistic-panel" :precision="4" title="Best 35 Avg." :value="b35Trans"/>
   </el-col>
-  <el-col :span="4">
+  <el-col :span="4" :xs="6">
     <el-statistic class="statistic-panel" :precision="4" title="Best 15 Avg." :value="b15Trans"/>
   </el-col>
 </template>
