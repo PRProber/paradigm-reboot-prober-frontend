@@ -1,5 +1,5 @@
 <script setup>
-import { reactive, onMounted, computed } from 'vue'
+import { reactive, onMounted, watch, computed } from 'vue'
 import Best50StatisticsPanel from "@/components/record/Best50StatisticsPanel.vue";
 import { getBestRecords } from "@/utils/api";
 import { ElMessage } from "element-plus";
@@ -59,6 +59,15 @@ const refreshRecords = () => {
     })
   })
 }
+
+userStore.$subscribe((mutation, state) => {
+  if (state.logged_in && mutation.type === 'patch object')
+    refreshRecords()
+  if (!state.logged_in) {
+    records.b35.splice(0, records.b35.length)
+    records.b15.splice(0, records.b15.length)
+  }
+})
 
 onMounted(() => {
   refreshRecords()

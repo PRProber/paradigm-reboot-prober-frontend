@@ -59,8 +59,7 @@ const profileDialogVisible = ref(false)
 const isCollapse = ref(true)
 
 const onClickLogoutBtn = () => {
-  userStore.access_token = ''
-  userStore.logged_in = false
+  userStore.$reset()
 }
 
 const onClickLoginBtn = () => {

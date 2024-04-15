@@ -27,9 +27,11 @@ const rules = reactive({
 
 const onSubmitLoginForm = () => {
   login(form.username, form.password).then((response) => {
-    userStore.logged_in = true
-    userStore.username = form.username
-    userStore.access_token = 'Bearer ' + response.data.access_token
+    userStore.$patch({
+      logged_in: true,
+      username: form.username,
+      access_token: 'Bearer ' + response.data.access_token
+    })
     ElMessage({
       'type': 'success',
       'message': i18n.t('message.login_success')
@@ -38,7 +40,7 @@ const onSubmitLoginForm = () => {
   }).catch((error) => {
     ElMessage({
       'type': 'error',
-      'message': i18n.t('message.login_failed') + error.response.data.detail
+      'message': i18n.t('message.login_failed')
     })
   })
 }
