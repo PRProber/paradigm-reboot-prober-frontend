@@ -2,7 +2,7 @@
 
 import { use } from 'echarts/core'
 import { ScatterChart } from 'echarts/charts'
-import { TooltipComponent, GridComponent, TitleComponent } from 'echarts/components'
+import { TooltipComponent, GridComponent } from 'echarts/components'
 import { CanvasRenderer } from 'echarts/renderers'
 import VChart, { THEME_KEY } from "vue-echarts";
 import { ref, provide, watch } from "vue";
@@ -46,7 +46,7 @@ const option = ref({
   }
 })
 
-watch(() => props.records, (newValue, oldValue) => {
+watch(() => props.records, () => {
   if (props.records !== null) {
     let data = []
     props.records.forEach((value) => {

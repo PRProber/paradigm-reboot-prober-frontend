@@ -40,7 +40,7 @@ const option = ref({
   }
 })
 
-watch(() => props.b50trends, (newValue, oldValue) => {
+watch(() => props.b50trends, () => {
   if (props.b50trends !== null) {
     const data = []
     props.b50trends.forEach((value) => {

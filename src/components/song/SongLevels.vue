@@ -6,7 +6,7 @@ import { onBeforeUnmount } from "vue";
 import { useStore } from "@/utils/store";
 import { getAllSongLevels } from "@/utils/api"
 import CommonLevels from "@/components/song/CommonLevels.vue";
-import { Download, Refresh, ShoppingCart} from "@element-plus/icons-vue";
+import { Refresh, ShoppingCart} from "@element-plus/icons-vue";
 import UploadListPreview from "@/components/record/UploadList.vue";
 
 const store = useStore()

@@ -8,7 +8,7 @@ import { useUserStore } from "@/utils/store";
 import CommonRecords from "@/components/record/CommonRecords.vue";
 import LevelRatingScatterChart from "@/components/chart/LevelRatingScatterChart.vue";
 import 'element-plus/theme-chalk/display.css'
-import {Download, Refresh, UploadFilled} from "@element-plus/icons-vue";
+import { Download, Refresh } from "@element-plus/icons-vue";
 import RatingTrendChart from "@/components/chart/RatingTrendChart.vue";
 import { saveAs } from 'file-saver'
 

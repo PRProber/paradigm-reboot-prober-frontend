@@ -1,13 +1,12 @@
 <script setup>
-import { ref, reactive, computed, onMounted } from "vue";
+import { ref, computed } from "vue";
 import { ElMessage } from "element-plus";
-import {More, Refresh, UploadFilled, Plus, ShoppingCart} from "@element-plus/icons-vue";
+import { More, UploadFilled, Plus } from "@element-plus/icons-vue";
 import SingleInfo from "@/components/song/SingleInfo.vue";
 import { getSingleSongInfo } from "@/utils/api";
 import QuickPostRecordForm from "@/components/record/QuickUploadRecordForm.vue";
 import { useStore } from "@/utils/store";
 import {useI18n} from "vue-i18n";
-import UploadListPreview from "@/components/record/UploadList.vue";
 
 defineEmits(['refreshLevels'])
 const props = defineProps(['levels'])
@@ -35,7 +34,7 @@ const pageSize = ref(15)
 const sortProp = ref(null)
 const sortOrder = ref(null)
 
-const onSortChange = ({column, prop, order}) => {
+const onSortChange = ({prop, order}) => {
   sortProp.value = prop
   sortOrder.value = order
 }
@@ -52,8 +51,7 @@ const onSingleInfo = songId => {
   })
 }
 
-const filterHandler = (value, row, column) => {
-  const property = column['property']
+const filterHandler = () => {
   return true
 }
 
@@ -225,7 +223,7 @@ const filterTableData = computed(() => {
         <el-table-column prop="level" :label="$t('term.level')" sortable="costum">
           <template #default="scope">{{ scope.row.level }}</template>
         </el-table-column>
-        <el-table-column prop="fitting_level" :label="$t('term.fitting_level')"sortable="costum">
+        <el-table-column prop="fitting_level" :label="$t('term.fitting_level')" sortable="costum">
           <template #default="scope">{{ scope.row.fitting_level }}</template>
         </el-table-column>
         <el-table-column align="right">

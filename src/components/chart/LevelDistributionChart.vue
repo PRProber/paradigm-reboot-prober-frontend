@@ -16,7 +16,7 @@ const props = defineProps({
   records: Array
 })
 
-watch(() => props.records, (newValue, oldValue) => {
+watch(() => props.records, (newValue) => {
   if (newValue !== null) {
     const map = new Map()
     const levelList = [], countList = []
