@@ -9,16 +9,20 @@ import Best50Records from "@/components/record/Best50Records.vue";
 import PlayRecords from "@/components/record/PlayRecords.vue";
 import messages from "@/utils/message";
 import { pinia } from "@/utils/store";
-import BestPlayRecords from "@/components/record/BestPlayRecords.vue";
 
 import "element-plus/theme-chalk/el-message-box.css"
 import 'element-plus/theme-chalk/dark/css-vars.css'
 import "element-plus/theme-chalk/el-message.css"
 import 'element-plus/theme-chalk/display.css'
+import About from "@/components/info/About.vue";
 
 const app= createApp(App)
 
 const routes = [
+    {
+      path: '/',
+      component: About
+    },
     {
         path: '/best50',
         component: Best50Records,
@@ -26,10 +30,6 @@ const routes = [
     {
         path: '/records',
         component: PlayRecords,
-    },
-    {
-        path: '/best',
-        component: BestPlayRecords,
     },
     {
         path: '/songs',

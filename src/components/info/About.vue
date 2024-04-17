@@ -3,7 +3,7 @@
 </script>
 
 <template>
-Best Play Records!
+About
 </template>
 
 <style scoped>

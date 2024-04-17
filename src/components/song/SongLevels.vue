@@ -7,7 +7,7 @@ import { useStore } from "@/utils/store";
 import { getAllSongLevels } from "@/utils/api"
 import CommonLevels from "@/components/song/CommonLevels.vue";
 import { Refresh, ShoppingCart} from "@element-plus/icons-vue";
-import UploadListPreview from "@/components/record/UploadList.vue";
+import UploadList from "@/components/record/UploadList.vue";
 
 const store = useStore()
 const i18n = useI18n()
@@ -45,7 +45,7 @@ onBeforeUnmount(() => {
           <template #reference>
             <el-button :icon="ShoppingCart" text/>
           </template>
-          <UploadListPreview/>
+          <UploadList/>
         </el-popover>
         <el-tooltip :content="$t('common.refresh')">
           <el-button @click="refreshLevelInfo" :icon="Refresh" text/>
