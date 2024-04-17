@@ -21,5 +21,13 @@ export default defineConfig({
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
-  }
+  },
+  devServer: {
+    proxy: {
+      '/api': {
+        target: 'https://api.prp.icel.site',
+        changeOrigin: true,
+      },
+    },
+  },
 })
