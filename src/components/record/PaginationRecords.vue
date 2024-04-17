@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, onMounted, computed } from "vue";
 import { ElMessage } from "element-plus";
 import { Plus, UploadFilled } from "@element-plus/icons-vue";
 import SingleInfo from "@/components/song/SingleInfo.vue";
@@ -9,7 +9,8 @@ import { useStore, useUserStore } from "@/utils/store";
 import { useI18n } from "vue-i18n";
 import moment from "moment";
 
-const props = defineProps(['scope'])
+const scopeBoolean = ref(true)
+const scope = computed(() => scopeBoolean.value ? 'best' : 'all')
 const singleSongInfoDialogVisible = ref(false)
 const data = ref(null)
 const total = ref(0)
@@ -42,9 +43,8 @@ const onSortChange = ({prop, order}) => {
 }
 
 const refreshData = () => {
-  const scope = props.scope === undefined ? 'best' : props.scope
   getRecords(userStore.username,
-      scope,
+      scope.value,
       pageSize.value,
       pageIndex.value,
       sortBy.value,
@@ -206,6 +206,13 @@ const dialogTitle = () => {
           <template #default="scope">{{ moment(scope.row.record_time).format('YY/MM/DD hh:mm A') }}</template>
         </el-table-column>
         <el-table-column align="right" :width="40">
+          <template #header>
+            <el-switch
+                v-model="scopeBoolean"
+                :active-text="$t('term.best_only')"
+                @change="refreshData"
+            />
+          </template>
           <template #default="scope">
             <el-space>
               <el-tooltip

@@ -57,6 +57,7 @@ const messages = {
             level_rating_distribution: "Level-rating Distribution",
             export_b50_image: "Export B50 Table (Image)",
             record_time: "Record Time",
+            best_only: "Best Only"
         },
         message: {
             welcome: "Welcome, {username}! ",
@@ -157,7 +158,8 @@ const messages = {
             level_rating_distribution: "定数-Rating 分布",
             export_b50_image: "导出 B50 图片",
             record_time: "记录时间",
-            upload_csv: "从 CSV 导入"
+            upload_csv: "从 CSV 导入",
+            best_only: "仅最佳"
         },
         message: {
             welcome: "欢迎，{username}！",

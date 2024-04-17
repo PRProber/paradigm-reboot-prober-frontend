@@ -1,6 +1,6 @@
 <script setup>
 import { ref, onMounted } from "vue";
-import {DataAnalysis, Medal, Memo, PieChart, User, SwitchButton, InfoFilled} from "@element-plus/icons-vue";
+import {DataAnalysis, Memo, PieChart, User, SwitchButton, InfoFilled} from "@element-plus/icons-vue";
 import { useI18n } from "vue-i18n";
 
 
