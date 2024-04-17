@@ -36,20 +36,22 @@ onBeforeUnmount(() => {
   <div style="height: 100%">
     <el-row justify="end">
       <el-col :span="2">
-        <el-popover
-            placement="bottom"
-            :title="$t('term.upload_list')"
-            :width="550"
-            trigger="hover"
-        >
-          <template #reference>
-            <el-button :icon="ShoppingCart" text/>
-          </template>
-          <UploadList/>
-        </el-popover>
-        <el-tooltip :content="$t('common.refresh')">
-          <el-button @click="refreshLevelInfo" :icon="Refresh" text/>
-        </el-tooltip>
+        <el-button-group>
+          <el-popover
+              placement="bottom"
+              :title="$t('term.upload_list')"
+              :width="550"
+              trigger="hover"
+          >
+            <template #reference>
+              <el-button :icon="ShoppingCart" text/>
+            </template>
+            <UploadList/>
+          </el-popover>
+          <el-tooltip :content="$t('common.refresh')">
+            <el-button @click="refreshLevelInfo" :icon="Refresh" text/>
+          </el-tooltip>
+        </el-button-group>
       </el-col>
     </el-row>
     <el-row justify="center" style="height: 90%; margin-top: 1em">

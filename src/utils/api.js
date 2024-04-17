@@ -9,7 +9,7 @@ const beforeRequest = config => {
 }
 
 const API_BASE = 'http://localhost:8000/api/v1';
-export const uploadCsvUrl = '/upload/csv'
+export const uploadCsvUrl = API_BASE + '/upload/csv'
 export const uploadImgUrl = '/upload/img'
 
 let client = axios.create({
@@ -103,6 +103,19 @@ export const postRecord = (username, formData) => {
                 play_records: formData
             }
         )
+}
+
+export const postCsvRecord = (username, csv_filename) => {
+    return client.post('/records/'+username, {
+        csv_filename: csv_filename
+    })
+}
+
+export const getCsv = (username) => {
+    return client.get(
+        '/records/'+username+'/export/csv',
+        { responseType: "blob" }
+    )
 }
 
 export const uploadCsv = (formData) => {

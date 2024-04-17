@@ -9,6 +9,8 @@ const messages = {
             refresh: "Refresh",
             upload_record: "Upload Record",
             about: "About",
+            select_file: "Select File",
+            upload_to_server: "Upload to Server",
         },
         auth: {
             login: "Login",
@@ -57,6 +59,8 @@ const messages = {
             level_rating_distribution: "Level-rating Distribution",
             export_b50_image: "Export B50 Table (Image)",
             record_time: "Record Time",
+            upload_csv: "Import via CSV",
+            export_csv: "Export CSV",
             best_only: "Best Only"
         },
         message: {
@@ -97,7 +101,11 @@ const messages = {
             refresh_upload_token_success: "Successfully refresh upload token",
             refresh_upload_token_failed: "Failed refresh upload token",
             update_profile_success: "Successfully update profile",
-            update_profile_failed: "Failed to update profile"
+            update_profile_failed: "Failed to update profile",
+            get_b50_img_success: "Successfully export B50 image",
+            get_b50_img_failed: "Failed to export B50 image",
+            get_csv_success: "Successfully export CSV",
+            get_csv_failed: "Failed to export CSV",
         }
     },
     zh_cn: {
@@ -110,6 +118,8 @@ const messages = {
             refresh: "刷新",
             upload_record: "上传记录",
             about: "关于",
+            select_file: "选择文件",
+            upload_to_server: "上传至服务器",
         },
         auth: {
             login: "登入",
@@ -159,6 +169,7 @@ const messages = {
             export_b50_image: "导出 B50 图片",
             record_time: "记录时间",
             upload_csv: "从 CSV 导入",
+            export_csv: "导出 CSV",
             best_only: "仅最佳"
         },
         message: {
@@ -198,7 +209,11 @@ const messages = {
             refresh_upload_token_success: "成功刷新上传 Token",
             refresh_upload_token_failed: "刷新上传 Token 失败",
             update_profile_success: "成功更新个人资料",
-            update_profile_failed: "更新个人资料失败"
+            update_profile_failed: "更新个人资料失败",
+            get_b50_img_success: "成功导出 B50 图片",
+            get_b50_img_failed: "导出 B50 图片失败",
+            get_csv_success: "导出 CSV 成功",
+            get_csv_failed: "导出 CSV 失败",
         }
     }
 }

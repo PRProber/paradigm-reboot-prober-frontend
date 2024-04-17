@@ -10,7 +10,7 @@ import { useI18n } from "vue-i18n";
 import moment from "moment";
 
 const scopeBoolean = ref(true)
-const scope = computed(() => scopeBoolean.value ? 'best' : 'all')
+const scopeStr = computed(() => scopeBoolean.value ? 'best' : 'all')
 const singleSongInfoDialogVisible = ref(false)
 const data = ref(null)
 const total = ref(0)
@@ -44,7 +44,7 @@ const onSortChange = ({prop, order}) => {
 
 const refreshData = () => {
   getRecords(userStore.username,
-      scope.value,
+      scopeStr.value,
       pageSize.value,
       pageIndex.value,
       sortBy.value,
