@@ -87,11 +87,15 @@ const onDownloadBest50Image = () => {
   getBest50Image(userStore.username).then(response => {
     const blob = new Blob([response.data], { type: 'image/png'})
     saveAs(blob, 'b50.png')
+    ElMessage({
+      type: 'success',
+      message: i18n.t('message.get_b50_img_success')
+    })
   }).catch(error => {
     const details = error.response === undefined ? '' : error.response.data.detail
     ElMessage({
       'type': 'error',
-      'message': i18n.t('message.get_b50_trending_failed') + details
+      'message': i18n.t('message.get_b50_img_failed') + details
     })
   })
 }
@@ -101,12 +105,14 @@ const onDownloadBest50Image = () => {
   <el-scrollbar>
     <el-row justify="end">
       <el-col :span="2">
-        <el-tooltip :content="$t('term.export_b50_image')">
-          <el-button :icon="Download" @click="onDownloadBest50Image" text/>
-        </el-tooltip>
-        <el-tooltip :content="$t('common.refresh')">
-          <el-button @click="refreshRecords" :icon="Refresh" text/>
-        </el-tooltip>
+        <el-button-group>
+          <el-tooltip :content="$t('term.export_b50_image')">
+            <el-button :icon="Download" @click="onDownloadBest50Image" text/>
+          </el-tooltip>
+          <el-tooltip :content="$t('common.refresh')">
+            <el-button @click="refreshRecords" :icon="Refresh" text/>
+          </el-tooltip>
+        </el-button-group>
       </el-col>
     </el-row>
     <el-row justify="center" style="margin-top:1em; margin-bottom: 2em;">

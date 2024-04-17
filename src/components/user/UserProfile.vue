@@ -2,12 +2,17 @@
 import { reactive, onMounted } from "vue";
 import { useUserStore } from "@/utils/store";
 import { Refresh } from "@element-plus/icons-vue";
+import { refreshUploadToken, updateMyInfo } from "@/utils/api";
+import {ElMessage} from "element-plus";
+import { useI18n } from "vue-i18n";
 
 const emit = defineEmits(['cancel'])
+const i18n = useI18n()
 
 const userStore = useUserStore()
 const form = reactive({
   username: '',
+  nickname: '',
   email: '',
   qq_number: 0,
   account: '',
@@ -19,6 +24,7 @@ const form = reactive({
 
 onMounted(() => {
   form.username = userStore.profile.username
+  form.nickname = userStore.profile.nickname
   form.email = userStore.profile.email
   form.qq_number = userStore.profile.qq_number
   form.account = userStore.profile.account
@@ -29,12 +35,34 @@ onMounted(() => {
 })
 
 const onSave = () => {
-  // TODO: Invoke update profile API
+  updateMyInfo(form).then((response) => {
+    userStore.profile = response.data
+    ElMessage({
+      type: "success",
+      message: i18n.t("message.update_profile_success")
+    })
+    emit('cancel')
+  }).catch(() => {
+    ElMessage({
+      type: "error",
+      message: i18n.t("message.update_profile_failed")
+    })
+  })
 }
 
 const onRefreshUploadToken = () => {
-  // TODO: Implement this function and corresponding API
-  console.log("Invoke refresh upload token API")
+  refreshUploadToken().then((response) => {
+    form.upload_token = response.data.upload_token
+    ElMessage({
+      type: 'success',
+      message: i18n.t("message.refresh_upload_token_success")
+    })
+  }).catch(() => {
+    ElMessage({
+      type: 'error',
+      message: i18n.t("message.refresh_upload_token_failed")
+    })
+  })
 }
 </script>
 
@@ -42,6 +70,9 @@ const onRefreshUploadToken = () => {
   <el-form :model="form" label-width="auto">
     <el-form-item :label="$t('auth.username')">
       {{ form.username }}
+    </el-form-item>
+    <el-form-item :label="$t('auth.nickname')">
+      <el-input v-model="form.nickname"/>
     </el-form-item>
     <el-form-item :label="$t('auth.upload_token')">
       <el-input v-model="form.upload_token" readonly>

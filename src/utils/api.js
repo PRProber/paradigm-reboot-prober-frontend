@@ -9,6 +9,9 @@ const beforeRequest = config => {
 }
 
 const API_BASE = 'http://localhost:8000/api/v1';
+export const uploadCsvUrl = API_BASE + '/upload/csv'
+export const uploadImgUrl = '/upload/img'
+
 let client = axios.create({
     baseURL: API_BASE,
     headers: {
@@ -46,6 +49,14 @@ export const getMyInfo = () => {
     return client.get('/user/me')
 }
 
+export const updateMyInfo = (formData) => {
+    return client.patch('/user/me', formData)
+}
+
+export const refreshUploadToken = () => {
+    return client.post('/user/me/upload-token')
+}
+
 export const getAllSongLevels = () => {
     return client.get('/songs')
 }
@@ -62,8 +73,21 @@ export const updateSong = (formData) => {
     return client.patch('/songs', formData)
 }
 
-export const getAllRecords = (username) => {
-    return client.get('/records/' + username)
+export const getRecords = (username,
+                           scope='best',
+                           page_size= 30,
+                           page_index= 1,
+                           sort_by = 'date',
+                           order = 'desc') => {
+    return client.get('/records/' + username, {
+        params: {
+            scope: scope,
+            page_size: page_size,
+            page_index: page_index,
+            sort_by: sort_by,
+            order: order,
+        }
+    })
 }
 
 export const getBestRecords = (username) => {
@@ -79,6 +103,27 @@ export const postRecord = (username, formData) => {
                 play_records: formData
             }
         )
+}
+
+export const postCsvRecord = (username, csv_filename) => {
+    return client.post('/records/'+username, {
+        csv_filename: csv_filename
+    })
+}
+
+export const getCsv = (username) => {
+    return client.get(
+        '/records/'+username+'/export/csv',
+        { responseType: "blob" }
+    )
+}
+
+export const uploadCsv = (formData) => {
+    return client.post('/upload/csv', formData, {
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        }
+    })
 }
 
 export const getBest50Image = (username) => {

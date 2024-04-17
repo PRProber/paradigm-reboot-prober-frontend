@@ -1,17 +1,19 @@
 <script setup>
 import { ref, onMounted } from "vue";
-import { DataAnalysis, Medal, Memo, PieChart } from "@element-plus/icons-vue";
+import {DataAnalysis, Memo, PieChart, User, SwitchButton, InfoFilled} from "@element-plus/icons-vue";
 import { useI18n } from "vue-i18n";
 
 
+import { useRouter } from 'vue-router'
 import { useUserStore, useStore } from "@/utils/store";
 import LoginForm from "@/components/user/LoginForm.vue";
 import RegisterForm from "@/components/user/RegisterForm.vue";
-import {getAllSongLevels, getMyInfo} from "@/utils/api";
+import { getAllSongLevels, getMyInfo} from "@/utils/api";
 import { ElMessage } from "element-plus";
 import UserProfile from "@/components/user/UserProfile.vue";
 
 const userStore = useUserStore()
+const router = useRouter()
 const store = useStore()
 const i18n = useI18n()
 
@@ -29,6 +31,7 @@ onMounted(() => {
       "type": "success",
       "message": i18n.t('message.get_my_info_success')
     })
+    router.push('/best50')
   }).catch(() => {
     if (userStore.logged_in) {
       ElMessage({
@@ -110,7 +113,7 @@ const onClickRegisterBtn = () => {
       <el-header>
         <el-menu mode="horizontal" :ellipsis="false">
           <el-space>
-            <h3>PR</h3>
+            <h3>Paradigm</h3>
             <h3 style="color: dodgerblue">Prober</h3>
           </el-space>
           <div class="flex-grow" />
@@ -118,12 +121,12 @@ const onClickRegisterBtn = () => {
             <el-text v-if="userStore.logged_in">
               {{ $t('message.welcome', { username: userStore.username }) }}
             </el-text>
-            <el-button v-if="userStore.logged_in" text @click="onClickProfileBtn">
-              <el-text type="primary">{{ $t('auth.profile') }}</el-text>
-            </el-button>
-            <el-button v-if="userStore.logged_in" text @click="onClickLogoutBtn">
-              <el-text type="danger">{{ $t('auth.logout') }}</el-text>
-            </el-button>
+            <el-tooltip :content="$t('auth.profile')">
+              <el-button v-if="userStore.logged_in" :icon="User" text @click="onClickProfileBtn"/>
+            </el-tooltip>
+            <el-tooltip :content="$t('auth.logout')">
+              <el-button v-if="userStore.logged_in" :icon="SwitchButton" text @click="onClickLogoutBtn"/>
+            </el-tooltip>
             <el-button v-if="!userStore.logged_in" text @click="onClickLoginBtn">
               {{ $t('auth.login') }}
             </el-button>
@@ -135,7 +138,7 @@ const onClickRegisterBtn = () => {
       </el-header>
       <el-container style="height: 100%">
         <el-aside width="auto" style="height: 100%">
-          <el-menu mode="vertical" :router="true" style="height: 100%" :collapse="isCollapse" default-active="0">
+          <el-menu mode="vertical" :router="true" style="height: 100%" :collapse="isCollapse">
             <el-menu-item index="0" route="/best50">
               <el-icon><DataAnalysis /></el-icon>
               <template #title>{{ $t('term.b50') }}</template>
@@ -144,13 +147,13 @@ const onClickRegisterBtn = () => {
               <el-icon><PieChart /></el-icon>
               <template #title>{{ $t('term.song_levels') }}</template>
             </el-menu-item>
-            <el-menu-item index="2" route="/best">
-              <el-icon><Medal /></el-icon>
-              <template #title>{{ $t('term.best_records') }} </template>
-            </el-menu-item>
-            <el-menu-item index="3" route="/records">
+            <el-menu-item index="2" route="/records">
               <el-icon><Memo /></el-icon>
               <template #title>{{ $t('term.records') }}</template>
+            </el-menu-item>
+            <el-menu-item index="3" route="/">
+              <el-icon><InfoFilled /></el-icon>
+              <template #title>{{ $t('common.about') }}</template>
             </el-menu-item>
           </el-menu>
         </el-aside>
