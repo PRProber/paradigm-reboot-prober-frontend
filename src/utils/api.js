@@ -8,12 +8,12 @@ const beforeRequest = config => {
     return config
 }
 
-const API_BASE = 'https://api.prp.icel.site:8000/api/v1';
+const API_BASE = 'https://api.prp.icel.site/api/v1';
 let client = axios.create({
     baseURL: API_BASE,
     headers: {
         'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': 'https://api.prp.icel.site:8000',
+        'Access-Control-Allow-Origin': 'https://api.prp.icel.site',
         'Access-Control-Allow-Credentials': 'true',
     },
 })
