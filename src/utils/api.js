@@ -96,10 +96,11 @@ export const getBestRecords = (username) => {
     })
 }
 
-export const postRecord = (username, formData) => {
+export const postRecord = (username, formData, is_replace) => {
     return client.post(
             '/records/'+username,
             {
+                is_replace: is_replace,
                 play_records: formData
             }
         )
