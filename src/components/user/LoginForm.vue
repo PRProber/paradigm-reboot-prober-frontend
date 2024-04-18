@@ -29,7 +29,7 @@ const onSubmitLoginForm = () => {
   login(form.username, form.password).then((response) => {
     userStore.$patch({
       logged_in: true,
-      username: form.username,
+      username: form.username.toLowerCase(),
       access_token: 'Bearer ' + response.data.access_token
     })
     ElMessage({
