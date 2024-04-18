@@ -30,7 +30,7 @@ onMounted(() => {
 })
 
 const onSubmit = () => {
-  postRecord(userStore.username, [form]).then((response) => {
+  postRecord(userStore.username, { is_replace: form.replace, records: [form]} ).then((response) => {
     ElMessage({
       type: "success",
       message: i18n.t('message.post_record_success')
