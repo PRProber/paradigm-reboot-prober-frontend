@@ -1,6 +1,6 @@
 <script setup>
 const props = defineProps(['song'])
-const cover_src_root = 'https://api.prp.icel.site/api/v1/cover/'
+const cover_src_root = '/cover/'
 
 const cover_src = () => {
   if (props.song != null)

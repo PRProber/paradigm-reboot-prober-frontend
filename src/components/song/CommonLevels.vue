@@ -160,7 +160,7 @@ const filterTableData = computed(() => {
         <el-table-column fixed prop="song_level_id" :label="$t('term.song_level_id')" width="100" sortable="costum">
           <template #default="scope"> {{ scope.row.song_level_id }} </template>
         </el-table-column>
-        <el-table-column fixed prop="title" :label="$t('term.title')" :width="300" sortable="costum">
+        <el-table-column fixed prop="title" :label="$t('term.title')" width="300" sortable="costum">
           <template #default="scope">
             <el-link @click="onSingleInfo(scope.row.song_id)">{{ scope.row.title }}</el-link>
           </template>
