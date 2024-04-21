@@ -53,6 +53,7 @@ const onSave = () => {
 const onRefreshUploadToken = () => {
   refreshUploadToken().then((response) => {
     form.upload_token = response.data.upload_token
+    userStore.profile.upload_token = response.data.upload_token
     ElMessage({
       type: 'success',
       message: i18n.t("message.refresh_upload_token_success")

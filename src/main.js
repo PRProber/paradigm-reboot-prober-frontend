@@ -41,8 +41,10 @@ const router = createRouter({
     routes,
 })
 
+const navLang = navigator.language.substring(0, 2)
+
 const i18n = createI18n({
-    locale: 'zh_cn',
+    locale: navLang,
     fallbackLocale: 'en',
     legacy: false,
     messages
