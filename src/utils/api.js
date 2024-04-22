@@ -8,7 +8,7 @@ const beforeRequest = config => {
     return config
 }
 
-const API_BASE = 'https://api.prp.icel.site/api/v1';
+const API_BASE = 'http://127.0.0.1:8000/api/v1';
 export const uploadCsvUrl = API_BASE + '/upload/csv'
 export const uploadImgUrl = API_BASE + '/upload/img'
 
