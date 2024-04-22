@@ -109,13 +109,13 @@ const messages = {
         },
         about: {
             title: "Paradigm: Reboot Prober (Online Rating Calculator)",
-            Content_1: "This website serves only as a reference for calculating the Rating in the game 'Paradigm: Reboot'. " +
+            content_1: "This website serves only as a reference for calculating the Rating in the game 'Paradigm: Reboot'. " +
                 "It does not guarantee that the data and calculations are 100% accurate. " +
                 "Please refer to the in-game display for the official rating.",
-            Content_2: "This website has no affiliation with Tuner Games or any related game publishing, " +
+            content_2: "This website has no affiliation with Tuner Games or any related game publishing, " +
                 "development, or distribution companies. It uses publicly available online resources, " +
                 "and all relevant copyrights belong to their respective owners." +
-                "This website does not contain any functionality that directly accesses user data. " +
+                "This website does not contain any functionality that directly accesses user data on the official server. " +
                 "Please do not use this code for cyber attacks or any other abusive behavior."
         }
     },
@@ -230,7 +230,7 @@ const messages = {
             title: "范式：起源 查分器",
             content_1: "本查分器仅为《范式：起源》游戏 Rating 计算提供参考，不保证数据与计算 100% 正确，请以游戏内显示为准。",
             content_2: "本查分器与击弦网络及相关游戏发行、开发、分发公司无任何关系，均使用互联网公开资源，相关版权归相关方所有。" +
-                "本网站不包含任何直接访问用户数据的功能，请勿使用本代码用于网络攻击或其他滥用行为。"
+                "本网站不包含任何直接访问官方服务器上用户数据的功能，请勿使用本代码用于网络攻击或其他滥用行为。"
         }
     }
 }
