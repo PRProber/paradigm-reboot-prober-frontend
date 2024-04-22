@@ -5,13 +5,22 @@ import PaginationRecords from "@/components/record/PaginationRecords.vue";
 import {Download, Refresh, ShoppingCart, Upload} from "@element-plus/icons-vue";
 import UploadCSVForm from "@/components/record/UploadCSVForm.vue";
 import {useUserStore} from "@/utils/store";
-import {getCsv} from "@/utils/api";
+import {getCsv, getRecords} from "@/utils/api";
 import { useI18n } from "vue-i18n";
 import {ElMessage} from "element-plus";
 
 const paginationRecords = ref(null)
 const userStore = useUserStore()
 const i18n = useI18n()
+
+const total = ref(0)
+const data = ref(null)
+
+const scopeRef = ref('')
+const pageSizeRef = ref(0)
+const pageIndexRef = ref(0)
+const sortByRef = ref('record_time')
+const sortOrderRef = ref('desc')
 
 const uploadCsvDialogVisible = ref(false)
 
@@ -27,6 +36,38 @@ const onExportCsv = () => {
     ElMessage({
       type: 'error',
       message: i18n.t('message.get_csv_failed')
+    })
+  })
+}
+
+const onUpdateQueryParam = (scope, pageSize, pageIndex, sortBy, sortOrder) => {
+  scopeRef.value = scope
+  pageSizeRef.value = pageSize
+  pageIndexRef.value = pageIndex
+  sortByRef.value = sortBy
+  sortOrderRef.value = sortOrder
+
+  getRecordData(false)
+}
+
+const getRecordData = (isRefresh = false) => {
+  getRecords(userStore.username,
+      scopeRef.value,
+      pageSizeRef.value,
+      pageIndexRef.value,
+      sortByRef.value,
+      sortOrderRef.value).then(response => {
+    if (data.value === null || isRefresh)
+      ElMessage({
+        'type': 'success',
+        'message': i18n.t("message.get_record_success")
+      })
+    data.value = response.data.records
+    total.value = response.data.total
+  }).catch( () => {
+    ElMessage({
+      message: i18n.t('message.get_record_failed'),
+      type: "error"
     })
   })
 }
@@ -58,14 +99,14 @@ const onExportCsv = () => {
             <UploadList/>
           </el-popover>
           <el-tooltip :content="$t('common.refresh')">
-            <el-button @click="" :icon="Refresh" text/>
+            <el-button @click="getRecordData(true)" :icon="Refresh" text/>
           </el-tooltip>
         </el-button-group>
       </el-col>
     </el-row>
     <el-row justify="center" style="height: 90%; margin-top: 1em">
       <el-col :span="22" style="height: 100%">
-        <PaginationRecords/>
+        <PaginationRecords :data="data" :total="total" @updateParam="onUpdateQueryParam"/>
       </el-col>
     </el-row>
   </div>

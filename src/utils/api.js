@@ -10,7 +10,7 @@ const beforeRequest = config => {
 
 const API_BASE = 'https://api.prp.icel.site/api/v1';
 export const uploadCsvUrl = API_BASE + '/upload/csv'
-export const uploadImgUrl = '/upload/img'
+export const uploadImgUrl = API_BASE + '/upload/img'
 
 let client = axios.create({
     baseURL: API_BASE,
