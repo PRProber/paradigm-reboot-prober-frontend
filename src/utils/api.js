@@ -8,15 +8,15 @@ const beforeRequest = config => {
     return config
 }
 
-const API_BASE = 'http://localhost:8000/api/v1';
+const API_BASE = 'http://127.0.0.1:8000/api/v1';
 export const uploadCsvUrl = API_BASE + '/upload/csv'
-export const uploadImgUrl = '/upload/img'
+export const uploadImgUrl = API_BASE + '/upload/img'
 
 let client = axios.create({
     baseURL: API_BASE,
     headers: {
         'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': 'http://localhost:8000',
+        'Access-Control-Allow-Origin': 'https://api.prp.icel.site',
         'Access-Control-Allow-Credentials': 'true',
     },
 })
@@ -96,10 +96,11 @@ export const getBestRecords = (username) => {
     })
 }
 
-export const postRecord = (username, formData) => {
+export const postRecord = (username, formData, is_replace) => {
     return client.post(
             '/records/'+username,
             {
+                is_replace: is_replace,
                 play_records: formData
             }
         )

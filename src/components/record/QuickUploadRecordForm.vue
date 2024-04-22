@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, reactive } from "vue";
+import { onMounted, reactive } from "vue";
 import { ElMessage } from "element-plus";
 import { postRecord } from "@/utils/api";
 import { useUserStore } from "@/utils/store";
@@ -30,7 +30,7 @@ onMounted(() => {
 })
 
 const onSubmit = () => {
-  postRecord(userStore.username, [form]).then((response) => {
+  postRecord(userStore.username, [form], form.replace).then((response) => {
     ElMessage({
       type: "success",
       message: i18n.t('message.post_record_success')

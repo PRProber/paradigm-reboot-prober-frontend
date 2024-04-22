@@ -3,7 +3,7 @@ import { ref, onMounted, computed } from "vue";
 import { ElMessage } from "element-plus";
 import { Plus, UploadFilled } from "@element-plus/icons-vue";
 import SingleInfo from "@/components/song/SingleInfo.vue";
-import { getRecords, getSingleSongInfo } from "@/utils/api";
+import {  getSingleSongInfo } from "@/utils/api";
 import QuickPostRecordForm from "@/components/record/QuickUploadRecordForm.vue";
 import { useStore, useUserStore } from "@/utils/store";
 import { useI18n } from "vue-i18n";
@@ -12,8 +12,7 @@ import moment from "moment";
 const scopeBoolean = ref(true)
 const scopeStr = computed(() => scopeBoolean.value ? 'best' : 'all')
 const singleSongInfoDialogVisible = ref(false)
-const data = ref(null)
-const total = ref(0)
+
 const pageSize = ref(15)
 const pageIndex = ref(1)
 const sortBy = ref('record_time')
@@ -32,6 +31,9 @@ const postRecord = ref({
   song_level_id: 0
 })
 
+const emit = defineEmits(['updateParam'])
+const props = defineProps(['data', 'total'])
+
 const onSortChange = ({prop, order}) => {
   sortBy.value = prop
   if (order === 'descending')
@@ -43,25 +45,7 @@ const onSortChange = ({prop, order}) => {
 }
 
 const refreshData = () => {
-  getRecords(userStore.username,
-      scopeStr.value,
-      pageSize.value,
-      pageIndex.value,
-      sortBy.value,
-      sortOrder.value).then(response => {
-    if (data.value === null)
-      ElMessage({
-        'type': 'success',
-        'message': i18n.t("message.get_record_success")
-      })
-    data.value = response.data.records
-    total.value = response.data.total
-  }).catch( () => {
-    ElMessage({
-      message: i18n.t('message.get_record_failed'),
-      type: "error"
-    })
-  })
+  emit('updateParam', scopeStr.value, pageSize.value, pageIndex.value, sortBy.value, sortOrder.value)
 }
 
 onMounted(() => {
@@ -131,13 +115,13 @@ const dialogTitle = () => {
           @cancel="quickPostRecordDialogVisible=false"
       />
     </el-dialog>
-    <el-dialog v-if="singleSongInfo != null" v-model="singleSongInfoDialogVisible" :title="dialogTitle()" width="800"
+    <el-dialog v-if="singleSongInfo != null" v-model="singleSongInfoDialogVisible" :title="dialogTitle()"
                append-to-body>
       <SingleInfo :song="singleSongInfo"></SingleInfo>
     </el-dialog>
     <el-row justify="center" style="height: 100%">
       <el-table
-          :data="data"
+          :data="props.data"
           table-layout="auto"
           :fit="true"
           height="100%"
@@ -210,7 +194,7 @@ const dialogTitle = () => {
             <el-switch
                 v-model="scopeBoolean"
                 :active-text="$t('term.best_only')"
-                @change="refreshData"
+                @change="$emit()"
             />
           </template>
           <template #default="scope">
@@ -249,9 +233,9 @@ const dialogTitle = () => {
     <el-row justify="center">
       <el-pagination
           layout="prev, pager, next"
-          :total="total"
+          :total="props.total"
           :page-size="pageSize"
-          @currentChange="refreshData()"
+          @currentChange="refreshData"
           v-model:current-page="pageIndex"
       />
     </el-row>
