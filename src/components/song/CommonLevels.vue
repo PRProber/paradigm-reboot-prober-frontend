@@ -140,7 +140,7 @@ const filterTableData = computed(() => {
           @cancel="quickPostRecordDialogVisible=false"
       />
     </el-dialog>
-    <el-dialog v-if="singleSongInfo != null" v-model="singleSongInfoDialogVisible" :title="dialogTitle()" width="800"
+    <el-dialog v-if="singleSongInfo != null" v-model="singleSongInfoDialogVisible" :title="dialogTitle()"
                append-to-body>
       <SingleInfo :song="singleSongInfo"></SingleInfo>
     </el-dialog>

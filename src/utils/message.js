@@ -68,10 +68,10 @@ const messages = {
             success_get: "Successfully get {data_name} data",
             search: "Type to search by song title",
             required: "This field is required",
-            username_length: "Length should be 6 to 10",
-            username_character: "Username must be consist of English characters and numbers",
+            username_length: "Length should be 6 to 16",
+            username_character: "Username must be consist of letters and numbers",
             password_length: "Length should be 8 to 20",
-            password_character: "Password must be consist of English characters and numbers",
+            password_character: "Password must be consist of one capitalized letter, one letter, and a number",
             password_mismatch: "Two passwords don't match",
             register_success: "Register success",
             register_failed: "Register failed, details: ",
@@ -106,9 +106,20 @@ const messages = {
             get_b50_img_failed: "Failed to export B50 image",
             get_csv_success: "Successfully export CSV",
             get_csv_failed: "Failed to export CSV",
+        },
+        about: {
+            title: "Paradigm: Reboot Prober (Online Rating Calculator)",
+            content_1: "This website serves only as a reference for calculating the Rating in the game 'Paradigm: Reboot'. " +
+                "It does not guarantee that the data and calculations are 100% accurate. " +
+                "Please refer to the in-game display for the official rating.",
+            content_2: "This website has no affiliation with Tuner Games or any related game publishing, " +
+                "development, or distribution companies. It uses publicly available online resources, " +
+                "and all relevant copyrights belong to their respective owners." +
+                "This website does not contain any functionality that directly accesses user data on the official server. " +
+                "Please do not use this code for cyber attacks or any other abusive behavior."
         }
     },
-    zh_cn: {
+    zh: {
         common: {
             submit: "提交",
             yes: "是",
@@ -177,10 +188,10 @@ const messages = {
             success_get: "成功获取 {data_name} 数据",
             search: "搜素曲名",
             required: "请输入该字段",
-            username_length: "用户名长度在 6 到 10 之间",
+            username_length: "用户名长度在 6 到 16 之间",
             username_character: "用户名必须由由数字或英文字母组成",
-            password_length: "密码长度在 8 到 10 之间",
-            password_character: "密码必须同时包含字母和数字",
+            password_length: "密码长度在 8 到 20 之间",
+            password_character: "密码必须同时包含一个大写字母、一个小写字母和一个数字",
             password_mismatch: "两次输入密码不匹配",
             register_success: "注册成功",
             register_failed: "注册失败，详情：",
@@ -214,6 +225,12 @@ const messages = {
             get_b50_img_failed: "导出 B50 图片失败",
             get_csv_success: "导出 CSV 成功",
             get_csv_failed: "导出 CSV 失败",
+        },
+        about: {
+            title: "范式：起源 查分器",
+            content_1: "本查分器仅为《范式：起源》游戏 Rating 计算提供参考，不保证数据与计算 100% 正确，请以游戏内显示为准。",
+            content_2: "本查分器与击弦网络及相关游戏发行、开发、分发公司无任何关系，均使用互联网公开资源，相关版权归相关方所有。" +
+                "本网站不包含任何直接访问官方服务器上用户数据的功能，请勿使用本代码用于网络攻击或其他滥用行为。"
         }
     }
 }

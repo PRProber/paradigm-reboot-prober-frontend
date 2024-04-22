@@ -44,9 +44,6 @@ const refreshRecords = () => {
       'type': 'success',
       'message': i18n.t('message.get_record_success')
     })
-    console.log("Parent")
-    console.log(b35Rating.value)
-    console.log(b15Rating.value)
   }).catch(error => {
     const details = error.response === undefined ? '' : error.response.data.detail
     ElMessage({
